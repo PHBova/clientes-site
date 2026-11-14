@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio.</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* Studio Design System · tokens comuns a todas as páginas do Studio (hub, Finances, Backlog e as próximas).
+   Fonte: vault Bova/Studio Hub/Studio Design System.md e o Figma "Studio · Hub" (coleção Semantic).
+   Cada página declara só o seu acento (--color-accent, --color-bg-navActive, --dot-light). Valor solto é defeito. */
+:root {
+  color-scheme: dark;
+  /* cor */
+  --color-bg-app: #1B1A1A;
+  --color-bg-panel: #272626;
+  --color-bg-surface: #303030;
+  --color-bg-chip: #353535;
+  --color-bg-track: #3A3A3A;
+  --color-bg-knob: #464646;
+  --color-bg-scrim: rgba(0, 0, 0, .6);
+  --color-border-default: #2F3030;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #A6ABB3;
+  --color-text-tertiary: #888A96;
+  --color-text-faint: #5B5B5B;
+  --color-text-onAccent: #000000;
+  --color-state-positive: #66CD7D;
+  --color-state-negative: #FFA8AD;
+  --color-state-warning: #FF9230;
+  --color-dot-base: #2A2929;
+  /* acento por tema (regra T5): Money, Play, Work */
+  --color-theme-money: #66CD7D;
+  --color-theme-play: #F3D27A;
+  --color-theme-work: #FF2F00;
+  /* tipo */
+  --font-text: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-num: "Geist Mono", ui-monospace, monospace;
+  /* forma */
+  --radius-panel: 24px;
+  --radius-card: 24px;
+  --radius-control: 12px;
+  --radius-chip: 8px;
+  --radius-pill: 999px;
+  --control: 44px;
+  /* página: conteúdo de 1280 centrado, margem de 80 (a largura do hub, padrão de todas as páginas) */
+  --page-max: 1280px;
+  --page-margin: 80px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Escala de tipo (Studio Design System, Tipografia) */
+.t-display { font: 300 44px/48px var(--font-text); letter-spacing: -0.02em; }
+.t-number { font: 300 32px/36px var(--font-text); letter-spacing: -0.02em; }
+.t-title { font: 500 22px/28px var(--font-text); }
+.t-headline { font: 500 16px/20px var(--font-text); }
+.t-body { font: 400 15px/20px var(--font-text); }
+.t-callout { font: 400 13px/16px var(--font-text); }
+.t-label { font: 400 12px/16px var(--font-num); }
+.t-caption { font: 400 11px/14px var(--font-text); }
+.c-2 { color: var(--color-text-secondary); }
+.c-3 { color: var(--color-text-tertiary); }
+.c-4 { color: var(--color-text-faint); }
+
+</style>
+<style>
+/* Studio. · tokens com os nomes do Figma (Studio · Hub, coleção Semantic). Valor solto aqui é defeito. */
+:root {
+  /* Hub: só o que é da página. Cor, tipo e forma vêm de _base/studio/tokens.css (Studio Design System). */
+  --color-project-finances: var(--color-theme-money);
+  --color-project-backlog: var(--color-theme-play);
+  --color-project-studio: var(--color-theme-work);
+  --dot-light: #FFFFFF;
+  --color-bg-hover: var(--color-bg-chip);
+  --font-sans: var(--font-text);
+  --font-mono: var(--font-num);
+  --space-sm: 8px;
+  --space-card: 24px;
+  --space-section: 48px;
+  --space-gutter: 24px;
+  --space-margin: 80px;
+  --radius-well: var(--radius-control);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--color-bg-app); color: var(--color-text-primary); }
+body { font: 400 15px/20px var(--font-sans); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+.mono { font-family: var(--font-mono); }
+
+#dots { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+
+.page { position: relative; z-index: 1; max-width: calc(var(--page-max) + 2 * var(--page-margin)); margin: 0 auto; padding: var(--space-section) var(--page-margin) 96px; }
+
+/* Hero: pintura do acervo do TV Gallery, logo e legenda. 1280 x 320, raio 24. */
+.hero { position: relative; height: 320px; border-radius: var(--radius-card); overflow: hidden; background: var(--color-bg-panel); }
+.hero .art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s var(--ease); }
+.hero .art.on { opacity: 1; }
+.scrim { position: absolute; left: 0; right: 0; pointer-events: none; }
+.scrim.top { top: 0; height: 140px; background: linear-gradient(rgba(0, 0, 0, .45), rgba(0, 0, 0, 0)); }
+.scrim.bottom { bottom: 0; height: 120px; background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5)); }
+.logo { position: absolute; top: 32px; left: 30px; margin: 0; line-height: 0; color: var(--color-text-primary); }
+.logo svg { display: block; width: 130px; height: auto; }
+.caption { position: absolute; right: 32px; bottom: 32px; margin: 0; font-size: 12px; line-height: 16px; color: rgba(255, 255, 255, .8); }
+
+/* Avatar: desenho do Bova, morde a borda de baixo do hero. */
+.owner { display: flex; align-items: flex-start; gap: var(--space-card); padding-left: 32px; margin-top: -56px; position: relative; }
+.avatar { width: 112px; height: 112px; border-radius: 50%; box-shadow: 0 0 0 6px var(--color-bg-app); background: var(--color-bg-app); }
+.owner-name { font: 500 20px/24px var(--font-sans); margin-top: 72px; }
+
+/* Avatar animado: 15 poses num SVG so; o script acende uma (.on) e liga as expressoes por classe. */
+svg.avatar { display: block; flex: none; overflow: hidden; }
+.avatar .p, .avatar .lid, .avatar .grin, .avatar .oh { display: none; }
+.avatar .p.on { display: inline; }
+.avatar .lid { fill: none; stroke: #000; stroke-width: 18; stroke-linecap: round; }
+.avatar .eye, .avatar .brow, .avatar .grin, .avatar .oh { transform-box: fill-box; transform-origin: center; }
+.avatar .eye { transition: transform 70ms ease-in; }
+.avatar .brow { transition: transform 140ms cubic-bezier(.34, 1.56, .64, 1); }
+.avatar.blink .eye { transform: scaleY(.15); }
+.avatar.shut .on .eye { display: none; }
+.avatar.shut .on .lid { display: inline; }
+.avatar.smile:not(.wow) .on .mouth, .avatar.wow .on .mouth { display: none; }
+.avatar.smile:not(.wow) .on .grin { display: inline; animation: avatar-pop 200ms cubic-bezier(.34, 1.56, .64, 1); }
+.avatar.wow .on .oh { display: inline; animation: avatar-pop 160ms cubic-bezier(.34, 1.56, .64, 1); }
+.avatar.wow .eye { transform: scale(1.22); transition: transform 140ms cubic-bezier(.34, 1.56, .64, 1); }
+.avatar.wow .brow { transform: translateY(-20px); }
+@keyframes avatar-pop { from { transform: scale(.5); } }
+
+/* Quadro: um tema por coluna, quatro por fileira. */
+.board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--space-gutter); row-gap: var(--space-section); margin-top: 48px; }
+.theme { display: flex; flex-direction: column; gap: 12px; }
+.theme-head { display: flex; align-items: center; gap: var(--space-sm); height: 29px; padding-bottom: 12px; border-bottom: 1px solid var(--color-border-default); margin-bottom: 4px; font: 400 12px/16px var(--font-mono); color: var(--color-text-tertiary); }
+.theme-head .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c); }
+.theme-head .num { color: var(--color-text-faint); }
+
+/* Bloco de projeto: 302 x 140, raio 24. A cor é do tema (--c).
+   A borda de 1 px fica dentro da caixa, então os recuos internos são 19 (20 no Figma, menos a borda). */
+.tile { position: relative; display: block; height: 140px; padding: 19px; border-radius: var(--radius-card); background: var(--color-bg-panel); border: 1px solid transparent; color: inherit; text-decoration: none; outline: none; transition: background-color .16s var(--ease), border-color .16s var(--ease); }
+.tile .well { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-well); background: color-mix(in srgb, var(--c) 14%, transparent); color: var(--c); }
+.tile .well svg { width: 24px; height: 24px; }
+.tile .name { position: absolute; left: 19px; top: 79px; font: 500 16px/20px var(--font-sans); }
+.tile .line { position: absolute; left: 19px; top: 103px; font-size: 13px; line-height: 16px; color: var(--color-text-tertiary); }
+.tile .arrow { position: absolute; right: 19px; top: 19px; width: 20px; height: 20px; color: var(--color-text-faint); transition: color .16s var(--ease); }
+.tile:hover { background: var(--color-bg-hover); border-color: color-mix(in srgb, var(--c) 50%, transparent); }
+.tile:hover .arrow, .tile:focus-visible .arrow { color: var(--color-text-primary); }
+.tile:focus-visible { box-shadow: 0 0 0 2px var(--c); }
+
+.tile.soon { background: transparent; border: 1px dashed var(--color-border-default); cursor: default; }
+.tile.soon .well { background: var(--color-bg-panel); color: var(--color-text-faint); }
+.tile.soon .name, .tile.soon .line { color: var(--color-text-faint); }
+.tile.soon .chip { position: absolute; right: 19px; top: 27px; padding: 4px 8px; border: 1px solid var(--color-border-default); border-radius: 6px; font: 400 11px/12px var(--font-mono); color: var(--color-text-faint); }
+
+/* Entrada: a pintura com fade, depois os temas em sequência (60 ms, 8 px). */
+/* O estado final é o normal da página: se a animação não rodar, o quadro aparece igual. */
+.theme { animation: rise .5s var(--ease) both; animation-delay: calc(200ms + var(--i) * 60ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) {
+  .theme { animation-name: fade; }
+  @keyframes fade { from { opacity: 0; } }
+}
+
+</style>
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+
+<main class="page">
+  <header class="hero" id="hero">
+    <img class="art" id="art" alt="" decoding="async">
+    <span class="scrim top" aria-hidden="true"></span>
+    <span class="scrim bottom" aria-hidden="true"></span>
+    <h1 class="logo" aria-label="Bova Studio"><span id="logo"></span></h1>
+    <p class="caption mono" id="caption"></p>
+  </header>
+
+  <div class="owner">
+    <img class="avatar" src="assets/avatar.png" width="112" height="112" alt="">
+    <span class="owner-name">Paulo Bova</span>
+  </div>
+
+  <nav class="board" id="board" aria-label="Projetos"></nav>
+</main>
+
+<script>
+// Studio Design System: campo de pontos do fundo, comum a todas as páginas do Studio.
+// O pattern da Bova (ponto de 2 px em grade de 16) acende como luz em volta do ponteiro.
+// A cor da luz é --dot-light (cada página põe a do seu acento; o hub usa branco).
+// window.dotLight(hex) troca a cor na hora; window.dotLight(null) volta à da página.
+// Sem ponteiro, a luz descansa no canto de baixo à direita. prefers-reduced-motion: a luz fica parada.
+
+(() => {
+  const cv = document.getElementById('dots');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const css = getComputedStyle(document.documentElement);
+  const DEFAULT = (css.getPropertyValue('--dot-light') || '#FFFFFF').trim();
+  const BASE = (css.getPropertyValue('--color-dot-base') || '#2A2929').trim();
+  const toRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  let rgb = toRgb(DEFAULT);
+  const GRID = 16;
+  const RADIUS = 220;
+  const BASE_ALPHA = 0.07;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let W = 0; let H = 0; let dpr = 1;
+  const rest = () => ({ x: W - 24, y: H * 0.6 });
+  let target = null; let pos = null; let raf = 0;
+
+  function size() {
+    dpr = Math.min(2, devicePixelRatio || 1);
+    W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (!target) target = rest();
+    if (!pos) pos = { ...target };
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const r2 = RADIUS * RADIUS;
+    for (let y = GRID / 2; y < H; y += GRID) {
+      for (let x = GRID / 2; x < W; x += GRID) {
+        const dx = x - pos.x; const dy = y - pos.y;
+        const lv = Math.exp(-(dx * dx + dy * dy) / r2 * 2.2);
+        const a = BASE_ALPHA + lv * 0.6;
+        const rr = 1 + lv * 0.6;
+        ctx.fillStyle = lv > 0.02 ? `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a.toFixed(3)})` : BASE;
+        ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  }
+
+  // A luz segue o ponteiro com atraso (lerp), para ler como luz e não como cursor.
+  function tick() {
+    pos.x += (target.x - pos.x) * 0.14;
+    pos.y += (target.y - pos.y) * 0.14;
+    draw();
+    raf = Math.hypot(target.x - pos.x, target.y - pos.y) > 0.5 ? requestAnimationFrame(tick) : 0;
+  }
+  function aim(x, y) {
+    target = { x, y };
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  window.dotLight = (hex) => { rgb = toRgb(hex || DEFAULT); draw(); };
+
+  addEventListener('resize', size);
+  if (!still) {
+    addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') aim(e.clientX, e.clientY); }, { passive: true });
+    document.addEventListener('mouseleave', () => { const r = rest(); aim(r.x, r.y); });
+  }
+  size();
+})();
+
+</script>
+<script>
+// Studio. · a porta de entrada dos projetos do Bova. Só portas: nenhum dado de planilha aqui.
+// Roteiro: Bova/Studio Hub/Studio Hub Flow.md (regras T1 a T8, H1 a H3, V1 a V3) no vault.
+
+// Temas e projetos. Projeto novo é uma linha a mais (T4); a cor é do tema (T5).
+const THEMES = [
+  { num: '01', name: 'Money', color: 'var(--color-project-finances)', hex: '#66CD7D', projects: [
+    { name: 'Finances', line: 'Dinheiro de casa e do estúdio', icon: 'wallet', href: '../../oikos/dashboard/' },
+  ] },
+  { num: '02', name: 'Play', color: 'var(--color-project-backlog)', hex: '#F3D27A', projects: [
+    { name: 'Backlog', line: 'A biblioteca do RetroOS', icon: 'game', href: '../../retroos/dashboard/' },
+  ] },
+  { num: '03', name: 'Work', color: 'var(--color-project-studio)', hex: '#FF2F00', projects: [
+    { name: 'Bova Studio', line: 'Os clientes do estúdio', icon: 'brief', href: null },
+  ] },
+];
+
+// Acervo do TV Gallery (H1): uma obra sorteada por visita, com legenda.
+const ART = [
+  ['almond-blossom', 'Vincent van Gogh · Amendoeira em flor · 1890'],
+  ['bay-of-marseille', 'Paul Cézanne · A baía de Marselha · c. 1885'],
+  ['cafe-terrace-at-night', 'Vincent van Gogh · Terraço do café à noite · 1888'],
+  ['fighting-temeraire', 'J. M. W. Turner · O Temerário · 1839'],
+  ['girl-with-a-pearl-earring', 'Johannes Vermeer · Moça com brinco de pérola · c. 1665'],
+  ['green-wheat-fields', 'Vincent van Gogh · Campos de trigo verde, Auvers · 1890'],
+  ['japanese-footbridge', 'Claude Monet · A ponte japonesa · 1899'],
+  ['meadow', 'Alfred Sisley · Prado · 1875'],
+  ['rabbit-warren-snow', 'Camille Pissarro · Coelheira em Pontoise, neve · 1879'],
+  ['roses', 'Vincent van Gogh · Rosas · 1890'],
+  ['stacks-of-wheat-autumn', 'Claude Monet · Medas de trigo, fim de tarde, outono · 1890-91'],
+  ['stacks-of-wheat-summer', 'Claude Monet · Medas de trigo, fim de verão · 1890-91'],
+  ['starry-night', 'Vincent van Gogh · A noite estrelada · 1889'],
+  ['the-bedroom', 'Vincent van Gogh · O quarto · 1889'],
+  ['the-great-wave', 'Katsushika Hokusai · A grande onda de Kanagawa · c. 1831'],
+  ['the-kiss', 'Gustav Klimt · O beijo · 1908'],
+  ['wanderer-sea-of-fog', 'Caspar David Friedrich · Caminhante sobre o mar de névoa · 1818'],
+  ['wheatfield-with-crows', 'Vincent van Gogh · Campo de trigo com corvos · 1890'],
+  ['woman-with-a-parasol', 'Claude Monet · Mulher com sombrinha · 1875'],
+];
+
+// Ícones Hugeicons, Stroke Rounded (MIT), o mesmo conjunto do Finances.
+const G = (d) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICON = {
+  wallet: G('<path d="M14 3H5a2 2 0 1 0 0 4h13c0-.93 0-1.395-.102-1.776a3 3 0 0 0-2.121-2.122C15.395 3 14.93 3 14 3"/><path d="M3 5v10c0 2.828 0 4.243.879 5.121C4.757 21 6.172 21 9 21h6c2.828 0 4.243 0 5.121-.879C21 19.243 21 17.828 21 15v-2c0-2.828 0-4.243-.879-5.121C19.243 7 17.828 7 15 7H7"/><path d="M21 12h-2c-.465 0-.698 0-.888.051a1.5 1.5 0 0 0-1.06 1.06C17 13.303 17 13.536 17 14s0 .697.051.888a1.5 1.5 0 0 0 1.06 1.06c.191.052.424.052.889.052h2"/>'),
+  game: G('<path d="M2.008 15.81c.223-3.494.88-6.05 1.435-7.535c.281-.75.885-1.308 1.658-1.495c4.3-1.04 9.498-1.04 13.798 0c.773.187 1.377.745 1.658 1.495c.556 1.485 1.212 4.041 1.435 7.534c.133 2.09-1.377 3.241-3.05 4.083c-1.064.537-1.883-1.046-2.427-2.272a1.82 1.82 0 0 0-1.687-1.084H9.172c-.739 0-1.39.415-1.687 1.084c-.544 1.226-1.363 2.809-2.428 2.272c-1.655-.833-3.183-1.976-3.049-4.083M5 4.5L6.963 4M19 4.5L17 4"/><path d="m9 13l-1.5-1.5m0 0L6 10m1.5 1.5L6 13m1.5-1.5L9 10"/><path stroke-width="2" d="M15.988 10h.01m1.99 3h.01"/>'),
+  brief: G('<path d="M2.001 8.5L2 13.997c-.001 3.3-.002 4.951 1.023 5.977S5.698 21 9 21h6c3.3 0 4.949 0 5.974-1.025S22 17.3 22 14.001l.001-5.501m-13.502-2c0-1.404 0-2.107.337-2.611a2 2 0 0 1 .551-.552C9.892 3 10.594 3 12 3c1.404 0 2.106 0 2.61.337a2 2 0 0 1 .553.552c.337.504.337 1.207.337 2.611"/><path d="M19.998 6.5h-16a2 2 0 0 0-2 2a4 4 0 0 0 4.001 4h11.999a4 4 0 0 0 4-4a2 2 0 0 0-2-2m-9.999 6v1c0 .465 0 .697.05.888a1.5 1.5 0 0 0 1.061 1.06c.191.052.424.052.889.052s.697 0 .888-.051a1.5 1.5 0 0 0 1.06-1.06c.052-.191.052-.424.052-.889v-1"/>'),
+  arrow: G('<path d="M9 6.65s6.938-.542 7.915.435S17.35 15 17.35 15m-.85-7.5l-10 10"/>'),
+};
+
+// Logo horizontal da Bova Studio (arquivo de marca, nó 6:5), vetor como está.
+const LOGO = '<svg viewBox="0 0 760 150" fill="currentColor" aria-hidden="true"><path d="M57.129 133.81C80.6302 133.81 99.6732 125.467 99.6732 102.284C99.6732 86.4258 87.636 75.0255 69.2936 73.8791V73.1148C83.5599 71.3316 94.2596 61.8419 94.2596 45.5375C94.2596 25.9214 79.9933 16.5591 58.5938 16.5591H12.7378V20.062C26.3672 20.062 28.2779 22.6732 28.2779 31.6534V118.716C28.2779 127.633 26.3672 130.308 12.7378 130.308V133.81H57.129ZM44.5186 27.0678C44.5186 25.0297 45.4102 23.6922 47.4483 23.3101C49.9321 22.6732 53.0529 22.5458 55.8552 22.5458C67.3829 22.5458 78.0826 29.4242 78.0826 46.1744C78.0826 63.1794 67.574 70.7584 55.5368 70.7584C52.0339 70.7584 48.2125 70.7584 44.5186 70.1852V27.0678ZM44.5186 77.382C48.2125 76.8088 51.8428 76.8088 55.6641 76.8088C67.0008 76.8088 83.2414 82.2224 83.2414 102.412C83.2414 122.665 69.0388 127.824 55.2183 127.824C48.3399 127.824 44.5186 126.741 44.5186 123.238V77.382Z"/><path d="M136.422 136.167C156.229 136.167 167.948 117.952 167.948 94.387C167.948 70.3125 155.337 53.4987 136.422 53.4987C116.487 53.4987 104.896 71.65 104.896 95.2786C104.896 119.289 117.379 136.167 136.422 136.167ZM138.651 129.734C125.722 129.734 119.544 106.552 119.544 86.6169C119.544 73.688 123.811 59.9312 134.193 59.9312C147.121 59.9312 153.108 83.114 153.108 103.049C153.108 115.914 149.032 129.734 138.651 129.734Z"/><path d="M202.786 113.557H201.894L189.538 70.6311C186.927 61.5235 186.927 59.6129 196.735 59.6129V56.11H162.725V59.6129C168.903 59.6129 171.514 61.5235 174.317 70.6311L194.251 134.957H202.149L222.083 70.6311C224.886 61.5235 227.688 59.6129 234.439 59.6129V56.11H209.027V59.6129C218.708 59.6129 218.58 61.5235 215.778 70.6311L202.786 113.557Z"/><path d="M286.536 117.251C286.282 126.486 283.925 129.416 280.868 129.416C278.512 129.416 277.047 127.633 277.047 120.499V77.191C277.047 61.3961 268.258 53.3076 253.991 53.3076C239.216 53.3076 228.643 62.4151 228.643 73.2422C228.643 78.7195 231.446 82.3498 236.732 82.3498C241.445 82.3498 243.929 79.5475 243.929 75.5987C243.929 72.2232 241.827 70.3126 241.827 66.937C241.827 62.0967 245.967 59.167 251.699 59.167C258.832 59.167 262.972 63.5615 262.972 76.1719V84.7063C246.221 92.1579 225.013 100.374 225.013 118.844C225.013 128.397 230.872 136.167 241.254 136.167C251.826 136.167 259.596 128.078 262.972 114.322V116.933C262.972 130.562 267.939 136.167 276.283 136.167C285.963 136.167 289.53 128.397 289.912 117.251H286.536ZM246.986 125.021C241.827 125.021 239.088 121.073 239.088 114.895C239.088 102.73 251.062 95.6608 262.972 89.5466V106.806C259.15 119.608 252.845 125.021 246.986 125.021Z"/><path d="M367.358 135.594C388.439 135.594 399.457 120.181 399.457 103.494C399.457 89.9924 390.795 79.2927 384.49 70.5036L378.631 62.0967C373.663 55.0909 369.077 49.1041 369.077 40.3151C369.077 30.4433 374.937 21.3995 387.547 21.3995C400.03 21.3995 408.246 31.6534 405.571 51.2696H409.138L418.5 17.0049H414.806L411.749 24.3292C411.176 25.9214 409.966 26.3672 408.373 24.775C402.068 17.8329 395.636 14.6484 386.401 14.6484C366.02 14.6484 354.429 29.2969 354.429 45.4102C354.429 55.6641 358.951 62.861 364.428 70.5036L371.115 80.1843C378.44 90.1198 384.299 98.7815 384.299 108.717C384.299 117.952 379.331 128.397 366.02 128.397C350.034 128.397 342.137 110.946 345.067 94.387H341.5L330.991 134.256H335.067L337.87 126.04C339.016 122.792 340.672 121.964 342.837 124.13C349.27 130.881 356.785 135.594 367.358 135.594Z"/><path d="M440.409 61.2688H454.803L456.267 56.5558H441.874L448.752 37.7676H443.912C437.479 49.8048 430.601 56.5558 416.971 57.3201L415.379 61.2688H426.334L408.756 111.519C406.845 116.933 405.38 121.964 405.38 125.913C405.38 131.772 408.31 135.594 415.507 135.594C428.563 135.594 440.154 121.327 447.033 105.087H443.53C437.607 116.933 429.709 126.741 423.149 126.741C420.665 126.741 420.028 125.276 420.028 122.983C420.028 120.181 421.493 115.914 422.831 111.647L440.409 61.2688Z"/><path d="M459.07 136.294C470.916 136.294 482.507 121.327 498.302 89.6741H499.64L490.405 114.322C488.239 120.181 486.456 123.684 486.456 126.932C486.456 132.346 489.067 136.422 496.837 136.422C508.747 136.422 518.237 121.646 523.714 108.462H520.147C515.307 119.162 508.747 128.397 503.334 128.397C501.423 128.397 500.659 127.378 500.659 125.149C500.659 122.983 502.569 117.952 503.779 114.576L523.841 56.5558H506.836C506.391 67.574 497.602 85.7253 491.551 96.8709C480.278 118.398 471.617 126.04 466.394 126.04C464.483 126.04 463.273 124.576 463.464 121.327C463.846 114.767 471.935 97.3167 479.705 78.2737C482.507 71.6501 484.673 66.555 484.673 62.861C484.673 58.4665 482.189 54.6451 476.903 54.6451C466.203 54.6451 455.248 66.555 448.497 79.4201H452C457.605 70.1852 464.038 62.4152 468.432 62.4152C469.578 62.4152 470.343 62.9884 470.343 64.8991C470.343 67.1282 467.986 72.9876 466.203 77.8279C458.879 93.9412 448.497 114.895 448.497 125.913C448.497 131.9 452.128 136.294 459.07 136.294Z"/><path d="M582.244 127.633C580.206 127.633 579.633 126.486 579.633 124.257C579.633 122.219 581.353 117.124 582.563 113.748L615.681 13.7568L613.898 12.7378C610.14 15.9222 603.198 17.0049 586.639 17.0049L585.811 20.3805C596.065 20.3805 599.122 23.2465 596.319 31.4623L583.008 71.0769H582.69C583.136 61.7146 579.314 54.5177 569.506 54.5177C549.126 54.5177 525.561 90.5657 525.561 116.678C525.561 128.078 530.083 136.294 538.745 136.294C551.801 136.294 565.112 112.729 572.118 97.3167H574.219L568.806 113.303C566.704 119.289 565.239 122.792 565.239 126.168C565.239 131.454 567.914 135.594 575.684 135.594C587.53 135.594 597.211 120.754 602.497 107.698H599.122C594.154 118.398 587.721 127.633 582.244 127.633ZM544.859 125.722C541.356 125.722 540.018 121.773 540.018 114.895C540.018 94.0686 557.788 61.9693 570.844 61.9693C575.684 61.9693 577.404 65.6633 577.404 71.9685C577.404 76.8089 576.257 81.4581 574.665 86.1711C568.933 102.603 553.521 125.722 544.859 125.722Z"/><path d="M646.761 39.8692C652.302 39.8692 656.123 36.1752 656.123 30.7617C656.123 25.1571 652.302 21.6542 646.761 21.6542C641.156 21.6542 637.399 25.1571 637.399 30.7617C637.399 36.1752 641.156 39.8692 646.761 39.8692ZM615.362 113.43C613.324 119.289 611.732 122.792 611.732 126.168C611.732 131.454 614.343 135.594 622.113 135.594C634.151 135.594 643.704 120.754 648.99 107.698H645.615C640.774 118.398 634.151 127.633 628.737 127.633C626.699 127.633 626.062 126.486 626.062 124.257C626.062 122.219 627.973 117.124 629.183 113.876L641.921 78.2736C644.277 71.7774 646.188 66.6823 646.188 62.8609C646.188 58.5938 643.704 54.7724 638.418 54.7724C627.718 54.7724 616.7 66.5549 609.949 79.5474H613.452C619.056 70.3125 625.489 62.5425 629.884 62.5425C631.094 62.5425 631.794 63.1794 631.794 65.0263C631.794 67.1281 629.756 73.1148 627.973 77.9552L615.362 113.43Z"/><path d="M673.574 136.294C695.419 136.294 716.564 107.571 716.564 79.8659C716.564 64.4532 707.711 54.3267 694.719 54.3267C673.001 54.3267 651.92 83.2414 651.92 111.073C651.92 126.614 660.709 136.294 673.574 136.294ZM674.784 129.989C668.479 129.989 665.804 124.448 665.804 115.595C665.804 92.3489 681.089 60.5045 693.7 60.5045C699.941 60.5045 702.744 66.2365 702.744 75.1529C702.744 98.7815 687.395 129.989 674.784 129.989Z"/><path d="M722.423 34.3284V36.3027H726.181V46.1108H728.474V36.3027H732.232V34.3284H722.423ZM747.262 46.1108L746.37 34.3284H742.995L740.957 40.1241C740.702 41.0157 740.447 41.971 740.129 43.0538C739.811 41.8437 739.619 41.0157 739.301 40.0604L737.327 34.3284H733.824L732.932 46.1108H735.161L735.607 39.1687C735.671 38.086 735.734 36.9396 735.734 35.9206H735.862C736.117 36.9396 736.435 38.2771 736.626 39.2324L738.792 45.9198H741.212L743.313 39.4235C743.632 38.2771 744.014 36.9396 744.269 35.9206H744.396C744.46 37.1307 744.46 38.2771 744.524 39.1687L744.969 46.1108H747.262Z"/></svg>';
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+// Hero
+$('logo').innerHTML = LOGO;
+const [slug, caption] = ART[Math.floor(Math.random() * ART.length)];
+const art = $('art');
+art.addEventListener('load', () => art.classList.add('on'), { once: true });
+art.src = `assets/art/${slug}.jpg`;
+$('caption').textContent = caption;
+
+// Quadro: um tema por coluna. Teclas 1 a 9 nos nove primeiros projetos vivos (T7).
+const live = [];
+$('board').innerHTML = THEMES.map((t, i) => `<section class="theme" style="--c:${t.color};--i:${i}" aria-label="${esc(t.name)}">
+  <header class="theme-head"><span class="dot"></span><span class="num">${t.num}</span><span>${esc(t.name)}</span></header>
+  ${t.projects.map((p) => {
+    const body = `<span class="well">${ICON[p.icon] || ''}</span><span class="name">${esc(p.name)}</span><span class="line">${esc(p.line)}</span>`;
+    if (!p.href) return `<div class="tile soon" aria-disabled="true">${body}<span class="chip">em preparo</span></div>`;
+    live.push(p.href);
+    const key = live.length <= 9 ? live.length : null;
+    return `<a class="tile" href="${p.href}" data-hex="${t.hex}"${key ? ` aria-keyshortcuts="${key}"` : ''}>${body}<span class="arrow">${ICON.arrow}</span></a>`;
+  }).join('')}
+</section>`).join('');
+
+// A luz dos pontos toma a cor do tema sob o mouse (H3).
+for (const a of document.querySelectorAll('a.tile')) {
+  a.addEventListener('mouseenter', () => window.dotLight && window.dotLight(a.dataset.hex));
+  a.addEventListener('mouseleave', () => window.dotLight && window.dotLight(null));
+}
+
+addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
+  const n = Number(e.key);
+  if (n >= 1 && n <= 9 && live[n - 1]) location.href = live[n - 1];
+});
+
+// Avatar animado: a cabeca vira para o ponteiro (15 poses), pisca sozinha, sorri sobre um projeto
+// e se surpreende no clique. Sem o SVG, ou com movimento reduzido, fica o desenho parado de frente.
+(async () => {
+  const img = document.querySelector('img.avatar');
+  if (!img) return;
+  let svg;
+  try {
+    const res = await fetch('assets/avatar.svg');
+    if (!res.ok) return;
+    const doc = new DOMParser().parseFromString(await res.text(), 'image/svg+xml');
+    svg = document.importNode(doc.documentElement, true);
+  } catch { return; }
+  if (svg.nodeName !== 'svg') return;
+  svg.setAttribute('width', 112); svg.setAttribute('height', 112);
+  const poses = {};
+  for (const g of svg.querySelectorAll('.p')) poses[g.dataset.p] = g;
+  let cur = null;
+  const show = (name) => {
+    if (name === cur || !poses[name]) return;
+    if (cur) poses[cur].classList.remove('on');
+    poses[name].classList.add('on'); cur = name;
+  };
+  show('A3');
+  img.replaceWith(svg);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Piscada: achata, fecha no arco, abre. De vez em quando, dupla.
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const blink = async () => {
+    if (svg.classList.contains('wow')) return;
+    svg.classList.add('blink'); await wait(60);
+    svg.classList.add('shut'); await wait(70);
+    svg.classList.remove('shut'); svg.classList.remove('blink'); await wait(100);
+  };
+  (async function loop() {
+    await wait(3000 + Math.random() * 3000);
+    if (!document.hidden) { await blink(); if (Math.random() < 0.2) { await wait(80); await blink(); } }
+    loop();
+  })();
+
+  // Expressoes nos projetos.
+  let wowTimer;
+  for (const a of document.querySelectorAll('a.tile')) {
+    a.addEventListener('mouseenter', () => svg.classList.add('smile'));
+    a.addEventListener('mouseleave', () => svg.classList.remove('smile'));
+    a.addEventListener('pointerdown', () => {
+      svg.classList.add('wow'); clearTimeout(wowTimer);
+      wowTimer = setTimeout(() => svg.classList.remove('wow'), 600);
+    });
+  }
+  addEventListener('pageshow', () => svg.classList.remove('wow', 'smile'));
+
+  // Seguir o ponteiro: direcao decide a pose; perto do avatar, olha de frente. Com folga para nao tremer.
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const H = 0.06, COLS = [-0.6, -0.18, 0.18, 0.6], ROWS = [-0.35, 0.35];
+  const level = (v, was, edges) => {
+    let l = edges.findIndex((e) => v < e); if (l < 0) l = edges.length;
+    if (l !== was) {
+      const lo = was > 0 ? edges[was - 1] - H : -Infinity, hi = was < edges.length ? edges[was] + H : Infinity;
+      if (v > lo && v < hi) return was;
+    }
+    return l;
+  };
+  let col = 2, row = 1, px = 0, py = 0, queued = false;
+  const aim = () => {
+    queued = false;
+    const b = svg.getBoundingClientRect();
+    const dx = px - (b.left + b.width / 2), dy = py - (b.top + b.height / 2);
+    const d = Math.max(Math.hypot(dx, dy), 160);
+    col = level(dx / d, col, COLS); row = level(dy / d, row, ROWS);
+    show('BAC'[row] + (col + 1));
+  };
+  addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'touch') return;
+    px = e.clientX; py = e.clientY;
+    if (!queued) { queued = true; requestAnimationFrame(aim); }
+  }, { passive: true });
+  document.documentElement.addEventListener('mouseleave', () => { col = 2; row = 1; show('A3'); });
+})();
+
+</script>
+</body>
+</html>
