@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Produtos · Band · Prévias</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/svg+xml" href="../../studio/hub/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Visor de produto Band (Mockup View v3, Figma ahgdwHfRHfAxi6fneicW0y, frame 68:154).
+   Compartilhado por band/produtos/<produto>/: cada produto só traz data.js e assets/.
+   Sistema: Apple claro (números do apple-metrics.swift), Geist no lugar da SF, Phosphor no lugar dos SF Symbols. */
+:root {
+  --bg: #F6F6F6;                 /* underPageBackground */
+  --label: rgba(0, 0, 0, 0.9);
+  --secondary: rgba(0, 0, 0, 0.5);
+  --stage-bg: #ECECEC;
+  --accent: #1B395D;             /* azul Band */
+  --dot-light: #1E5BA1;          /* luz dos pontos em volta do ponteiro */
+  --color-dot-base: rgba(27, 57, 93, 0.3);
+  --stage-w: 882px;              /* 4:3 */
+  --stage-h: 662px;
+  --radius-stage: 12px;
+  --radius-thumb: 8px;
+  --s1: 4px; --s2: 8px; --s3: 16px; --s4: 24px; --s5: 40px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { background: var(--bg); }
+body { font-family: 'Geist', -apple-system, system-ui, sans-serif; color: var(--label); -webkit-font-smoothing: antialiased; }
+#dots { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+.page { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 30px 16px var(--s5); }
+
+.collab { display: flex; align-items: center; gap: 14px; height: 40px; }
+.collab .bova { height: 20.4px; width: auto; }
+.collab .band { height: 38px; width: auto; }
+.collab .x { font-size: 15.6px; color: var(--secondary); line-height: 1; }
+
+.stage { position: relative; width: min(var(--stage-w), 100%); aspect-ratio: 882 / 662; margin-top: 38px; border-radius: var(--radius-stage); overflow: hidden; background: var(--stage-bg); touch-action: pan-y; }
+.stage img.photo { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.16s ease; }
+.stage img.photo.fade { opacity: 0; }
+.stage:fullscreen { background: #000; border-radius: 0; width: 100vw; height: 100vh; aspect-ratio: auto; }
+.stage:fullscreen img.photo { object-fit: contain; }
+
+/* Liquid Glass: vidro quase transparente, contorno fino, brilho especular na borda de cima e sombra macia. */
+.glass {
+  background: rgba(255, 255, 255, 0.10);
+  border: 0.5px solid rgba(255, 255, 255, 0.35);
+  -webkit-backdrop-filter: blur(3px) saturate(1.6) brightness(1.06);
+  backdrop-filter: blur(3px) saturate(1.6) brightness(1.06);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0.5px rgba(255, 255, 255, 0.14),
+    inset 1px 0 0.5px rgba(255, 255, 255, 0.16),
+    inset -1px 0 0.5px rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+button.glass, a.glass { position: absolute; width: 36px; height: 36px; border-radius: 18px; display: grid; place-items: center; cursor: pointer; padding: 0; transition: transform 0.15s ease, background 0.15s ease; }
+button.glass:hover, a.glass:hover { background: rgba(255, 255, 255, 0.18); }
+button.glass:active, a.glass:active { transform: scale(0.94); }
+button.glass:disabled { opacity: 0.35; cursor: default; }
+.glass svg { width: 16px; height: 16px; fill: currentColor; }
+.prev { left: 16px; top: calc(50% - 18px); }
+.next { right: 16px; top: calc(50% - 18px); }
+.full { right: 60px; top: 16px; }
+.down { right: 16px; top: 16px; }
+.caption { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; align-items: baseline; gap: 8px; padding: 9px 16px; border-radius: 18px; white-space: nowrap; max-width: calc(100% - 32px); }
+.caption b { font-size: 15px; line-height: 20px; font-weight: 600; }
+.caption span { font-size: 13px; line-height: 16px; color: rgba(255, 255, 255, 0.8); overflow: hidden; text-overflow: ellipsis; }
+
+.info { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; margin-top: 16px; list-style: none; padding: 0; color: var(--secondary); font-size: 13px; line-height: 16px; }
+.info li { display: flex; align-items: center; gap: 6px; }
+.info svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
+
+.thumbs { display: flex; gap: 24px; margin-top: 24px; overflow-x: auto; max-width: 100%; padding: 2px; scrollbar-width: none; }
+.thumbs::-webkit-scrollbar { display: none; }
+.thumbs button { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 12px; width: 162px; flex: none; }
+.thumbs img { width: 162px; height: 122px; object-fit: cover; border-radius: var(--radius-thumb); background: var(--stage-bg); display: block; outline: 2px solid transparent; outline-offset: -2px; transition: outline-color 0.15s ease; }
+.thumbs span { font-size: 11px; line-height: 14px; text-align: center; color: var(--secondary); }
+.thumbs [aria-current="true"] img { outline-color: var(--accent); }
+.thumbs [aria-current="true"] span { color: var(--label); font-weight: 500; }
+.thumbs button:focus-visible img { outline-color: var(--dot-light); }
+
+@media (max-width: 600px) {
+  .stage { margin-top: 24px; }
+  .caption { flex-direction: column; align-items: center; gap: 0; padding: 7px 14px; }
+  .thumbs { gap: 12px; }
+  .thumbs button, .thumbs img { width: 104px; } .thumbs img { height: 78px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+</style>
+<style>
+/* Índice de produtos da Band: mesmo sistema do visor, cartões no tamanho das miniaturas ampliado. */
+.hub-title { margin-top: 48px; font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.hub-lead { margin-top: 4px; font-size: 13px; line-height: 16px; color: var(--secondary); }
+.products { list-style: none; padding: 0; margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fill, 260px); gap: 32px 24px; justify-content: center; width: min(882px, 100%); }
+.products a { display: flex; flex-direction: column; gap: 4px; color: inherit; text-decoration: none; }
+.products img { width: 260px; height: 195px; object-fit: cover; border-radius: var(--radius-thumb); background: var(--stage-bg); margin-bottom: 8px; outline: 2px solid transparent; outline-offset: -2px; transition: outline-color 0.15s ease; }
+.products a:hover img, .products a:focus-visible img { outline-color: var(--accent); }
+.pname { font-size: 15px; line-height: 20px; font-weight: 600; }
+.pmeta { font-size: 13px; line-height: 16px; color: var(--secondary); }
+@media (max-width: 600px) { .products { grid-template-columns: 1fr; } .products img { width: 100%; height: auto; aspect-ratio: 4 / 3; } }
+
+</style>
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+<main class="page">
+  <p class="collab" aria-label="Bova Studio e Band">
+    <img class="bova" src="assets/bova.svg" alt="Bova Studio">
+    <span class="x" aria-hidden="true">×</span>
+    <img class="band" src="assets/band-tv.png" alt="Band">
+  </p>
+  <h1 class="hub-title">Produtos</h1>
+  <p class="hub-lead">Prévias de produto do grupo Band, uma por peça.</p>
+  <ul class="products" id="products"></ul>
+</main>
+<script>
+// Um produto novo entra aqui e ganha a pasta band/produtos/<id>/ (index.html, data.js, assets/).
+const PRODUCTS = [
+  { id: 'copo-tv', name: 'Copo TV Band', brand: 'TV Band', thumb: 'copo-tv/assets/th/render.jpg', views: 3, year: 'Nov 2026' },
+  { id: 'polo-play', name: 'Camisa polo', brand: 'Play 99.7', thumb: 'polo-play/assets/th/navy-1.jpg', views: 16, year: 'Nov 2026' },
+];
+document.getElementById('products').innerHTML = PRODUCTS.map((p) =>
+  `<li><a href="${p.id}/"><img src="${p.thumb}" alt="" loading="lazy"><span class="pname">${p.name}</span><span class="pmeta">${p.brand} · ${p.views} imagens · ${p.year}</span></a></li>`).join('');
+</script>
+<script>
+// Cópia do band/dashboard/dots.js (que vem de _base/signature/dots.js) para o visor de produtos da Band.
+// (sólida, troca com o tema) no lugar do branco a 7%, que some no modo claro.
+// Campo de pontos do fundo da página: o pattern da Bova (ponto de 2 px em grade de 16) que
+// acende como luz em volta do ponteiro. A cor vem de --dot-light; a base, de --dot-base.
+// Sem ponteiro (toque, ou antes do primeiro movimento) a luz descansa no canto de baixo à direita.
+// prefers-reduced-motion: a luz não segue o ponteiro, fica parada nesse canto.
+
+(() => {
+  const cv = document.getElementById('dots');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const hex = (v, d) => (v || d).trim();
+  let rgb = [0, 0, 0]; let BASE = '#1E1E1E';
+  function colors() {
+    const css = getComputedStyle(document.documentElement);
+    const LIGHT = hex(css.getPropertyValue('--dot-light'), '#7C94D5');
+    rgb = [1, 3, 5].map((i) => parseInt(LIGHT.slice(i, i + 2), 16));
+    BASE = hex(css.getPropertyValue('--color-dot-base'), '#1E1E1E');
+  }
+  colors();
+  const GRID = 16;
+  const RADIUS = 220;          // alcance da luz, em px
+  const BASE_ALPHA = 0.07;     // ponto apagado
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let W = 0; let H = 0; let dpr = 1;
+  const rest = () => ({ x: W - 24, y: H * 0.6 }); // margem direita, atrás dos cards e longe do rodapé (no dashboard)
+  let target = null; let pos = null; let raf = 0;
+
+  function size() {
+    dpr = Math.min(2, devicePixelRatio || 1);
+    W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (!target) target = rest();
+    if (!pos) pos = { ...target };
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const r2 = RADIUS * RADIUS;
+    for (let y = GRID / 2; y < H; y += GRID) {
+      for (let x = GRID / 2; x < W; x += GRID) {
+        const dx = x - pos.x; const dy = y - pos.y;
+        const lv = Math.exp(-(dx * dx + dy * dy) / r2 * 2.2);
+        const a = BASE_ALPHA + lv * 0.85;
+        const rr = 1 + lv * 0.9;
+        ctx.fillStyle = lv > 0.02
+          ? `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a.toFixed(3)})`
+          : BASE;
+        ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  }
+
+  // A luz segue o ponteiro com atraso (lerp), para ler como luz e não como cursor.
+  function tick() {
+    pos.x += (target.x - pos.x) * 0.14;
+    pos.y += (target.y - pos.y) * 0.14;
+    draw();
+    raf = Math.hypot(target.x - pos.x, target.y - pos.y) > 0.5 ? requestAnimationFrame(tick) : 0;
+  }
+  function aim(x, y) {
+    target = { x, y };
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  addEventListener('resize', size);
+  matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => { colors(); draw(); });
+  if (!still) {
+    addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') aim(e.clientX, e.clientY); }, { passive: true });
+    document.addEventListener('mouseleave', () => { const r = rest(); aim(r.x, r.y); });
+  }
+  size();
+})();
+
+</script>
+</body>
+</html>
