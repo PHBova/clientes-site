@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Presentes · Natal 2026</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1B1A1A">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="assets/touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="../../studio/hub/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* Studio Design System · tokens comuns a todas as páginas do Studio (hub, Finances, Backlog e as próximas).
+   Fonte: vault Bova/Studio Hub/Studio Design System.md e o Figma "Studio · Hub" (coleção Semantic).
+   Cada página declara só o seu acento (--color-accent, --color-bg-navActive, --dot-light). Valor solto é defeito. */
+:root {
+  color-scheme: dark;
+  /* cor */
+  --color-bg-app: #1B1A1A;
+  --color-bg-panel: #272626;
+  --color-bg-surface: #303030;
+  --color-bg-chip: #353535;
+  --color-bg-track: #3A3A3A;
+  --color-bg-knob: #464646;
+  --color-bg-scrim: rgba(0, 0, 0, .6);
+  --color-border-default: #2F3030;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #A6ABB3;
+  --color-text-tertiary: #888A96;
+  --color-text-faint: #5B5B5B;
+  --color-text-onAccent: #000000;
+  --color-state-positive: #66CD7D;
+  --color-state-negative: #FFA8AD;
+  --color-state-warning: #FF9230;
+  --color-dot-base: #2A2929;
+  /* acento por tema (regra T5): Money, Play, Work */
+  --color-theme-money: #66CD7D;
+  --color-theme-play: #F3D27A;
+  --color-theme-work: #FF2F00;
+  /* tipo */
+  --font-text: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-num: "Geist Mono", ui-monospace, monospace;
+  /* forma */
+  --radius-panel: 24px;
+  --radius-card: 24px;
+  --radius-control: 12px;
+  --radius-chip: 8px;
+  --radius-pill: 999px;
+  --control: 44px;
+  /* página: conteúdo de 1280 centrado, margem de 80 (a largura do hub, padrão de todas as páginas) */
+  --page-max: 1280px;
+  --page-margin: 80px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Escala de tipo (Studio Design System, Tipografia) */
+.t-display { font: 300 44px/48px var(--font-text); letter-spacing: -0.02em; }
+.t-number { font: 300 32px/36px var(--font-text); letter-spacing: -0.02em; }
+.t-title { font: 500 22px/28px var(--font-text); }
+.t-headline { font: 500 16px/20px var(--font-text); }
+.t-body { font: 400 15px/20px var(--font-text); }
+.t-callout { font: 400 13px/16px var(--font-text); }
+.t-label { font: 400 12px/16px var(--font-num); }
+.t-caption { font: 400 11px/14px var(--font-text); }
+.c-2 { color: var(--color-text-secondary); }
+.c-3 { color: var(--color-text-tertiary); }
+.c-4 { color: var(--color-text-faint); }
+
+</style>
+<style>
+/* Presentes · Natal 2026. Página de celular no padrão do iOS, sobre os tokens do Studio.
+   Escala de texto medida no iOS 27 (simulador, Brain/Scripts/apple-metrics-ios.swift, tamanho Large):
+   largeTitle 34/41, headline 17/22 semibold, body 17/22, subheadline 15/20, footnote 13/18, caption1 12/16.
+   Botão large medido: 50 de altura. Geist no lugar da SF e traço próprio no lugar dos SF Symbols, por licença.
+   Acento: Pangram Red (--color-theme-work), com semântica: vermelho é feito. */
+:root {
+  --color-accent: var(--color-theme-work);
+  --dot-light: #FF2F00;
+  --gutter: 24px;                       /* margem da página: ~6% de 390, regra da casa */
+  --row: 52px;                          /* linha de lista do iOS 26 com body 17 */
+  --sep-inset: 52px;                    /* separador começa no texto, não na borda */
+  --glass: rgba(48, 48, 48, .62);
+  --glass-edge: rgba(255, 255, 255, .08);
+  --separator: rgba(255, 255, 255, .09);
+  --dock-h: 64px;
+  --t-large: 700 34px/41px var(--font-text);
+  --t-headline: 600 17px/22px var(--font-text);
+  --t-body: 400 17px/22px var(--font-text);
+  --t-sub: 400 15px/20px var(--font-text);
+  --t-foot: 400 13px/18px var(--font-text);
+  --t-cap: 400 12px/16px var(--font-num);
+}
+@media (max-width: 359px) { :root { --gutter: 16px; } }
+
+[hidden] { display: none !important; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { -webkit-text-size-adjust: 100%; }
+html, body { margin: 0; background: var(--color-bg-app); color: var(--color-text-primary); font: var(--t-body); -webkit-font-smoothing: antialiased; font-feature-settings: "tnum" 1; }
+body.locked { overflow: hidden; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; text-align: left; }
+h1, h2, p { margin: 0; }
+.mono { font-family: var(--font-num); }
+svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+svg.ph { width: 20px; height: 20px; fill: currentColor; flex: none; }
+#dots { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+.glass { background: var(--glass); -webkit-backdrop-filter: blur(24px) saturate(1.8); backdrop-filter: blur(24px) saturate(1.8); box-shadow: inset 0 0 0 .5px var(--glass-edge), 0 8px 32px rgba(0, 0, 0, .45); }
+
+/* barra compacta: some sob o título grande e entra com vidro quando ele sai */
+.navbar { position: fixed; z-index: 15; top: 0; left: 0; right: 0; height: calc(44px + env(safe-area-inset-top)); padding: env(safe-area-inset-top) var(--gutter) 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(27, 26, 26, .72); -webkit-backdrop-filter: blur(24px) saturate(1.8); backdrop-filter: blur(24px) saturate(1.8); border-bottom: .5px solid var(--separator);
+  opacity: 0; pointer-events: none; transition: opacity .2s var(--ease); cursor: pointer; }
+.navbar.on { opacity: 1; pointer-events: auto; }
+.nav-title { font: var(--t-headline); }
+.nav-count { position: absolute; right: var(--gutter); bottom: 13px; font: var(--t-cap); color: var(--color-text-secondary); }
+
+.page { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; padding: calc(24px + env(safe-area-inset-top)) var(--gutter) calc(var(--dock-h) + 56px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 28px; }
+
+/* marca centrada, no topo da página */
+.brand { align-self: center; line-height: 0; color: var(--color-text-primary); padding: 8px 0 4px; }
+.brand svg { height: 36px; width: auto; display: block; }
+
+/* cabeçalho: etiqueta de spec, título grande e o medidor */
+.head { display: flex; flex-direction: column; gap: 12px; }
+.spec { font: var(--t-cap); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-tertiary); padding: 12px 0; border-top: .5px solid var(--separator); border-bottom: .5px solid var(--separator); }
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 4px; }
+.title { font: var(--t-large); letter-spacing: -0.01em; }
+/* botão de adicionar: círculo de 44 com o acento, ao lado do título grande (barra do iOS) */
+.add { width: 44px; height: 44px; border-radius: 22px; background: var(--color-bg-panel); color: var(--color-text-primary); display: grid; place-items: center; flex: none; }
+.add svg.ph { width: 22px; height: 22px; }
+.add:active { transform: scale(.94); }
+.meter { display: flex; flex-direction: column; gap: 10px; }
+.meter-row { display: flex; align-items: baseline; gap: 10px; }
+.big { font: 300 28px/34px var(--font-text); letter-spacing: -0.02em; }
+.big b { font-weight: 300; color: var(--color-text-faint); }
+.unit { font: var(--t-cap); color: var(--color-text-secondary); }
+/* um traço por item: o dado vira gráfico, a unidade está escrita ao lado */
+.ticks { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; height: 16px; }
+.ticks span { background: var(--color-bg-track); border-radius: 1px; transition: background .3s var(--ease); }
+.ticks span.on { background: var(--color-accent); }
+.meter-sub { font: var(--t-cap); color: var(--color-text-tertiary); }
+
+/* busca e segmentado */
+.controls { display: flex; flex-direction: column; gap: 12px; }
+.search { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border-radius: 22px; background: var(--color-bg-panel); color: var(--color-text-tertiary); }
+.search input { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: var(--color-text-primary); font: var(--t-body); padding: 0; -webkit-appearance: none; appearance: none; }
+.search input::placeholder { color: var(--color-text-tertiary); }
+.search input::-webkit-search-cancel-button { filter: invert(.6); }
+.seg { position: relative; display: grid; grid-template-columns: 1fr 1fr; height: 36px; padding: 2px; border-radius: 18px; background: var(--color-bg-panel); }
+.seg-thumb { position: absolute; top: 2px; bottom: 2px; left: 2px; width: calc(50% - 2px); border-radius: 16px; background: var(--color-bg-knob); box-shadow: 0 2px 8px rgba(0, 0, 0, .3); transition: transform .28s var(--ease); }
+.seg[data-at="open"] .seg-thumb { transform: translateX(100%); }
+.seg button { position: relative; z-index: 1; text-align: center; font: 500 13px/18px var(--font-text); color: var(--color-text-secondary); }
+.seg button[aria-pressed="true"] { color: var(--color-text-primary); font-weight: 600; }
+
+/* lista agrupada (inset grouped): cabeçalho fora, linhas num bloco de canto 24, separador recuado */
+.view { display: flex; flex-direction: column; gap: 24px; }
+
+/* seção: chip que abre e fecha (como as faixas do dia num planner), cartões em pilha embaixo */
+.sec-block { display: flex; flex-direction: column; gap: 12px; }
+.chip { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px 0 12px; border-radius: 16px; background: var(--color-bg-chip); color: var(--color-text-secondary); font: var(--t-cap); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.chip svg.ph { width: 14px; height: 14px; }
+.chip .n { color: var(--color-text-tertiary); letter-spacing: 0; }
+.chip .chev { width: 16px; height: 16px; transform: rotate(90deg); }
+.chip[aria-expanded="false"] .chev { transform: rotate(0deg); }
+.chip:active { opacity: .7; }
+.cards { display: flex; flex-direction: column; gap: 8px; }
+
+/* cartão da pessoa: fechado é uma linha só (foto, nome, resumo, anel); aberto mostra os itens */
+.pcard { background: var(--color-bg-panel); border-radius: var(--radius-card); overflow: hidden; }
+.p-head { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 76px; padding: 14px 16px; }
+.p-head:active { background: var(--color-bg-surface); }
+.avatar { width: 44px; height: 44px; border-radius: 22px; overflow: hidden; flex: none; background: var(--color-bg-surface); display: grid; place-items: center; color: var(--color-text-tertiary); }
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avatar svg.ph { width: 22px; height: 22px; }
+.p-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.p-name { font: var(--t-headline); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.p-desc { font: var(--t-sub); color: var(--color-text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.p-meta { font: var(--t-cap); font-size: 11px; color: var(--color-text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcard.given .p-name { color: var(--color-text-secondary); }
+.ring { position: relative; width: 32px; height: 32px; flex: none; display: grid; place-items: center; }
+.ring .rg { position: absolute; inset: 0; width: 32px; height: 32px; transform: rotate(-90deg); fill: none; stroke-width: 2.5; }
+.ring .trk { stroke: var(--color-bg-knob); }
+.ring .val { stroke: var(--color-accent); stroke-linecap: round; transition: stroke-dasharray .3s var(--ease); }
+.ring .val.zero { opacity: 0; }
+.ring b { position: relative; font: 500 11px/1 var(--font-num); color: var(--color-text-secondary); }
+/* entregue: o anel vira um círculo cheio com o visto, igual à bolinha do item */
+.ring.full { border-radius: 16px; background: var(--color-accent); }
+.ring.full .rg { display: none; }
+.ring > svg:not(.rg) { width: 16px; height: 16px; fill: none; stroke: var(--color-text-onAccent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.p-body { border-top: .5px solid var(--separator); }
+.p-foot { gap: 10px; }
+.p-foot .link { padding-left: 0; }
+.spacer { flex: 1; }
+.sw-label { display: inline-flex; align-items: center; gap: 6px; font: var(--t-sub); color: var(--color-text-secondary); }
+.sw-label svg.ph { width: 18px; height: 18px; color: var(--color-text-tertiary); }
+.group { display: flex; flex-direction: column; }
+.g-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0 4px 6px; }
+.g-name, .g-head h2 { font: var(--t-headline); }
+.g-head.sec h2 { display: inline-flex; align-items: center; gap: 6px; }
+.g-head.sec h2 svg.ph { width: 14px; height: 14px; }
+.g-head.sec h2 { font: var(--t-cap); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-tertiary); }
+.g-count { font: var(--t-cap); color: var(--color-text-tertiary); flex: none; margin-left: auto; }
+.g-head .g-name { min-width: 0; }
+/* ação em texto, como o "Editar" das listas do iOS */
+.link { display: inline-flex; align-items: center; gap: 4px; font: 400 15px/20px var(--font-text); color: var(--color-text-secondary); padding: 10px 0 10px 8px; margin: -10px 0; flex: none; }
+.link svg.ph { width: 16px; height: 16px; }
+.link.strong { font-weight: 600; color: var(--color-text-primary); }
+.tag { font: var(--t-cap); font-size: 11px; color: var(--color-text-tertiary); margin-left: 8px; padding: 1px 6px; border-radius: 6px; background: var(--color-bg-chip); vertical-align: 2px; }
+.row.empty .link { margin-left: auto; color: var(--color-text-primary); }
+.add-row { display: flex; align-items: center; gap: 12px; min-height: var(--row); padding: 0 16px; width: 100%; color: var(--color-text-primary); font: var(--t-body); background: var(--color-bg-panel); border-radius: var(--radius-card); }
+.add-row svg.ph { width: 24px; height: 24px; color: var(--color-text-secondary); }
+.add-row:active { background: var(--color-bg-surface); }
+.g-desc { font: var(--t-sub); color: var(--color-text-tertiary); padding: 0 4px 10px; margin-top: -2px; }
+.group.given .g-name { color: var(--color-text-secondary); }
+.list { background: var(--color-bg-panel); border-radius: var(--radius-card); overflow: hidden; }
+.row { position: relative; display: flex; align-items: center; gap: 12px; min-height: var(--row); padding: 0 16px; width: 100%; }
+.row + .row::before, .disclosure + .disclosure::before, .sub > .row::before { content: ""; position: absolute; top: 0; left: var(--sep-inset); right: 0; border-top: .5px solid var(--separator); }
+.disclosure { position: relative; }
+.row.empty { color: var(--color-text-faint); font: var(--t-sub); }
+button.row.empty { width: 100%; }
+button.row:active, .item:active { background: var(--color-bg-surface); }
+
+/* item: bolinha de marcar (estilo Lembretes), rótulo com quem faz embaixo */
+.item { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; align-self: stretch; margin: 0 -16px; padding: 0 16px; }
+.row:has(.thumb) .item { margin-right: 0; padding-right: 0; }
+.box { width: 24px; height: 24px; border-radius: 12px; box-shadow: inset 0 0 0 1.5px var(--color-bg-knob); display: grid; place-items: center; flex: none; transition: background .2s var(--ease), box-shadow .2s var(--ease), transform .12s; }
+.item:active .box { transform: scale(.88); }
+.box svg { width: 14px; height: 14px; fill: none; stroke: var(--color-text-onAccent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+.item[aria-checked="true"] .box { background: var(--color-accent); box-shadow: none; }
+.item[aria-checked="true"] .box svg { opacity: 1; }
+.label { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 11px 0; font: var(--t-body); }
+.item[aria-checked="true"] .label { color: var(--color-text-tertiary); }
+.who { font: var(--t-cap); color: var(--color-text-tertiary); margin-top: 2px; display: inline-flex; align-items: center; gap: 4px; }
+.who svg.ph { width: 13px; height: 13px; }
+.who.tbd { color: var(--color-text-secondary); }
+.local { width: 6px; height: 6px; border-radius: 3px; background: var(--color-text-secondary); flex: none; }
+.thumb { width: 36px; height: 44px; border-radius: 8px; overflow: hidden; background: var(--color-bg-surface); flex: none; display: block; }
+.thumb:active { opacity: .7; }
+.thumb img, .prod-img img, .sh-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.broken img { display: none; }
+
+/* entregue: switch do iOS, 51 x 31 */
+.switch-row .label { padding: 0; color: var(--color-text-secondary); flex-direction: row; align-items: center; gap: 12px; }
+.switch-row .label svg.ph { width: 24px; height: 24px; color: var(--color-text-tertiary); }
+.row.empty { gap: 12px; }
+.row.empty > svg.ph { width: 24px; height: 24px; }
+.switch { position: relative; width: 51px; height: 31px; border-radius: 16px; background: var(--color-bg-knob); flex: none; transition: background .25s var(--ease); }
+.switch span { position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 14px; background: #FFFFFF; box-shadow: 0 3px 8px rgba(0, 0, 0, .25); transition: transform .25s var(--ease); }
+.switch[aria-checked="true"] { background: var(--color-accent); }
+.switch[aria-checked="true"] span { transform: translateX(20px); }
+
+/* produção: quantidade em destaque, disclosure com chevron que gira */
+.make .qty { font: 300 28px/34px var(--font-text); letter-spacing: -0.02em; min-width: 40px; flex: none; }
+.make .qty small { font: var(--t-cap); color: var(--color-text-tertiary); letter-spacing: 0; margin-left: 2px; }
+.disclosure.done .make .label { color: var(--color-text-tertiary); }
+.chev { color: var(--color-text-faint); transition: transform .2s var(--ease); }
+.disclosure.open > .make .chev { transform: rotate(90deg); }
+.sub { background: rgba(0, 0, 0, .14); }
+.prod { gap: 14px; padding-top: 8px; padding-bottom: 8px; }
+.prod-img { width: 44px; height: 56px; border-radius: 10px; overflow: hidden; background: var(--color-bg-surface); flex: none; }
+.prod-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.prod-name { font: var(--t-headline); }
+.prod-price { font: var(--t-foot); color: var(--color-text-secondary); display: inline-flex; align-items: center; gap: 4px; }
+.prod-price svg.ph { width: 13px; height: 13px; }
+.none { font: var(--t-sub); color: var(--color-text-tertiary); text-align: center; padding: 24px 0; }
+
+.foot { display: flex; justify-content: space-between; gap: 16px; font-size: 11px; line-height: 14px; color: var(--color-text-faint); border-top: .5px solid var(--separator); padding-top: 16px; }
+
+/* barra de abas: cápsula de vidro, ícone sobre rótulo; enviar é um círculo de vidro ao lado */
+.dock { position: fixed; z-index: 10; left: 50%; transform: translateX(-50%); bottom: calc(12px + env(safe-area-inset-bottom)); width: min(calc(100% - 2 * var(--gutter)), 560px); display: flex; gap: 10px; }
+.tabs { flex: 1; display: flex; gap: 2px; padding: 4px; height: var(--dock-h); border-radius: 32px; }
+.tabs button { flex: 1; border-radius: 28px; color: var(--color-text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font: 600 10px/12px var(--font-text); text-align: center; transition: background .2s var(--ease), color .2s; }
+.tabs button svg.ph { width: 24px; height: 24px; }
+.send svg.ph { width: 22px; height: 22px; }
+.search svg.ph { width: 18px; height: 18px; }
+.tabs button[aria-selected="true"] { background: rgba(255, 255, 255, .1); color: var(--color-text-primary); }
+.send { width: var(--dock-h); height: var(--dock-h); border-radius: 32px; display: grid; place-items: center; position: relative; flex: none; }
+.send:active, .tabs button:active { transform: scale(.96); }
+.send[data-n]::after { content: attr(data-n); position: absolute; top: 6px; right: 6px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--color-accent); color: var(--color-text-onAccent); font: 600 11px/18px var(--font-num); text-align: center; }
+
+/* folha do produto */
+.sheet { position: fixed; inset: 0; z-index: 30; }
+.sheet .scrim { position: absolute; inset: 0; background: var(--color-bg-scrim); opacity: 0; transition: opacity .28s var(--ease); }
+.sheet .panel { position: absolute; left: 0; right: 0; bottom: 0; max-width: 600px; margin: 0 auto; background: var(--color-bg-surface); border-radius: 32px 32px 0 0; padding: 12px var(--gutter) calc(24px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; gap: 6px; transform: translateY(100%); transition: transform .32s var(--ease); max-height: 88vh; overflow: auto; }
+.sheet.on .scrim { opacity: 1; }
+.sheet.on .panel { transform: none; }
+.grabber { width: 36px; height: 5px; border-radius: 3px; background: var(--color-text-faint); margin-bottom: 12px; }
+.close { position: absolute; top: 14px; right: 16px; width: 32px; height: 32px; border-radius: 16px; background: var(--color-bg-knob); display: grid; place-items: center; color: var(--color-text-secondary); }
+.close svg.i { width: 16px; height: 16px; stroke-width: 2; }
+.sh-img { width: 168px; height: 208px; border-radius: 16px; overflow: hidden; background: var(--color-bg-panel); margin: 8px 0 12px; }
+.sh-src svg.ph { width: 13px; height: 13px; }
+.sh-src { display: inline-flex; align-items: center; gap: 4px; font: var(--t-cap); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-tertiary); }
+.sh-name { font: 700 22px/28px var(--font-text); text-align: center; }
+.sh-price { font: var(--t-sub); color: var(--color-text-secondary); }
+.btn-large svg.ph { width: 18px; height: 18px; }
+.btn-large { gap: 8px; grid-auto-flow: column; align-self: stretch; height: 50px; border-radius: 25px; background: var(--color-accent); color: var(--color-text-onAccent); font: var(--t-headline); display: grid; place-items: center; text-decoration: none; margin-top: 16px; }
+.btn-large:active { opacity: .8; }
+.sh-seen { font: var(--t-cap); color: var(--color-text-faint); margin-top: 4px; }
+
+.toast { position: fixed; z-index: 40; left: 50%; transform: translateX(-50%); bottom: calc(var(--dock-h) + 28px + env(safe-area-inset-bottom)); max-width: calc(100% - 2 * var(--gutter)); background: var(--color-bg-surface); box-shadow: inset 0 0 0 .5px var(--glass-edge); padding: 12px 18px; border-radius: 22px; font: var(--t-foot); }
+
+/* folha de edição: barra fixa no topo, corpo rola */
+.panel.tall { height: 92vh; height: 92dvh; max-height: none; padding: 0; align-items: stretch; gap: 0; overflow: hidden; display: flex; flex-direction: column; }
+.ed-bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 56px; padding: 0 var(--gutter); border-bottom: .5px solid var(--separator); flex: none; }
+.ed-bar .link { padding: 12px 0; margin: 0; justify-self: start; }
+.ed-bar .link svg.ph { width: 16px; height: 16px; }
+.link.strong { justify-self: end; }
+.ed-title { font: var(--t-headline); text-align: center; }
+.ed-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 8px var(--gutter) calc(32px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 12px; }
+.ed-body .list { background: var(--color-bg-panel); }
+/* corpo da folha tem altura fixa: sem isto o flex espreme os blocos e o overflow corta os campos */
+.ed-body > * { flex-shrink: 0; }
+.f-head { font: var(--t-cap); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-tertiary); padding: 16px 4px 0; }
+.f-note { font: var(--t-foot); color: var(--color-text-tertiary); text-align: center; padding: 8px 16px 0; }
+.field { position: relative; display: flex; align-items: center; gap: 12px; min-height: var(--row); padding: 0 16px; }
+.field + .field::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; border-top: .5px solid var(--separator); }
+.field > span { font: var(--t-body); color: var(--color-text-secondary); width: 112px; flex: none; display: inline-flex; align-items: center; gap: 8px; }
+.field > span svg.ph { width: 20px; height: 20px; color: var(--color-text-tertiary); }
+.field.col > span svg.ph { width: 14px; height: 14px; }
+.field.col { flex-direction: column; align-items: stretch; gap: 8px; padding: 12px 16px; }
+.field.col > span { width: auto; font: var(--t-foot); color: var(--color-text-tertiary); }
+.field input { flex: 1; min-width: 0; background: none; border: 0; outline: 0; color: var(--color-text-primary); font: var(--t-body); padding: 14px 0; }
+.field input::placeholder { color: var(--color-text-faint); }
+.remove { width: 28px; height: 28px; border-radius: 14px; background: var(--color-bg-knob); color: var(--color-text-secondary); display: grid; place-items: center; flex: none; }
+.remove svg.i { width: 16px; height: 16px; stroke-width: 2.2; }
+.seg4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; padding: 2px; border-radius: 16px; background: var(--color-bg-surface); height: 56px; }
+.seg4 button { border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-align: center; font: 500 11px/13px var(--font-text); color: var(--color-text-secondary); white-space: nowrap; }
+.seg4 button[aria-pressed="true"] { background: var(--color-bg-knob); color: var(--color-text-primary); font-weight: 600; box-shadow: 0 2px 8px rgba(0, 0, 0, .3); }
+.picks { display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px; padding: 2px 16px 4px; scrollbar-width: none; }
+.picks::-webkit-scrollbar { display: none; }
+.pick { width: 44px; height: 56px; border-radius: 10px; overflow: hidden; flex: none; background: var(--color-bg-surface); box-shadow: inset 0 0 0 0 var(--color-accent); opacity: .55; transition: opacity .2s, box-shadow .2s; position: relative; }
+.pick img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pick[aria-pressed="true"] { opacity: 1; outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.pick-name { font: var(--t-foot); color: var(--color-text-secondary); }
+.action svg.ph { width: 20px; height: 20px; }
+.action { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: var(--row); padding: 0 16px; text-align: center; font: var(--t-body); color: var(--color-text-primary); }
+.action.danger { color: var(--color-state-negative); }
+.action:active { background: var(--color-bg-surface); }
+
+button:focus-visible, a:focus-visible, .search:focus-within { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+</style>
+</head>
+<body>
+<canvas id="dots" aria-hidden="true"></canvas>
+
+<!-- barra compacta (iOS): título inline com vidro, aparece quando o título grande sai da tela; toque volta ao topo -->
+<header class="navbar" id="navbar" aria-hidden="true">
+  <span class="nav-title">Presentes</span>
+  <span class="nav-count mono" id="nav-count"></span>
+</header>
+
+<main class="page">
+  <div class="brand" role="img" aria-label="Bova Studio"><svg viewBox="0 0 760 150" fill="currentColor" aria-hidden="true" focusable="false"><path d="M57.129 133.81C80.6302 133.81 99.6732 125.467 99.6732 102.284C99.6732 86.4258 87.636 75.0255 69.2936 73.8791V73.1148C83.5599 71.3316 94.2596 61.8419 94.2596 45.5375C94.2596 25.9214 79.9933 16.5591 58.5938 16.5591H12.7378V20.062C26.3672 20.062 28.2779 22.6732 28.2779 31.6534V118.716C28.2779 127.633 26.3672 130.308 12.7378 130.308V133.81H57.129ZM44.5186 27.0678C44.5186 25.0297 45.4102 23.6922 47.4483 23.3101C49.9321 22.6732 53.0529 22.5458 55.8552 22.5458C67.3829 22.5458 78.0826 29.4242 78.0826 46.1744C78.0826 63.1794 67.574 70.7584 55.5368 70.7584C52.0339 70.7584 48.2125 70.7584 44.5186 70.1852V27.0678ZM44.5186 77.382C48.2125 76.8088 51.8428 76.8088 55.6641 76.8088C67.0008 76.8088 83.2414 82.2224 83.2414 102.412C83.2414 122.665 69.0388 127.824 55.2183 127.824C48.3399 127.824 44.5186 126.741 44.5186 123.238V77.382Z"/><path d="M136.422 136.167C156.229 136.167 167.948 117.952 167.948 94.387C167.948 70.3125 155.337 53.4987 136.422 53.4987C116.487 53.4987 104.896 71.65 104.896 95.2786C104.896 119.289 117.379 136.167 136.422 136.167ZM138.651 129.734C125.722 129.734 119.544 106.552 119.544 86.6169C119.544 73.688 123.811 59.9312 134.193 59.9312C147.121 59.9312 153.108 83.114 153.108 103.049C153.108 115.914 149.032 129.734 138.651 129.734Z"/><path d="M202.786 113.557H201.894L189.538 70.6311C186.927 61.5235 186.927 59.6129 196.735 59.6129V56.11H162.725V59.6129C168.903 59.6129 171.514 61.5235 174.317 70.6311L194.251 134.957H202.149L222.083 70.6311C224.886 61.5235 227.688 59.6129 234.439 59.6129V56.11H209.027V59.6129C218.708 59.6129 218.58 61.5235 215.778 70.6311L202.786 113.557Z"/><path d="M286.536 117.251C286.282 126.486 283.925 129.416 280.868 129.416C278.512 129.416 277.047 127.633 277.047 120.499V77.191C277.047 61.3961 268.258 53.3076 253.991 53.3076C239.216 53.3076 228.643 62.4151 228.643 73.2422C228.643 78.7195 231.446 82.3498 236.732 82.3498C241.445 82.3498 243.929 79.5475 243.929 75.5987C243.929 72.2232 241.827 70.3126 241.827 66.937C241.827 62.0967 245.967 59.167 251.699 59.167C258.832 59.167 262.972 63.5615 262.972 76.1719V84.7063C246.221 92.1579 225.013 100.374 225.013 118.844C225.013 128.397 230.872 136.167 241.254 136.167C251.826 136.167 259.596 128.078 262.972 114.322V116.933C262.972 130.562 267.939 136.167 276.283 136.167C285.963 136.167 289.53 128.397 289.912 117.251H286.536ZM246.986 125.021C241.827 125.021 239.088 121.073 239.088 114.895C239.088 102.73 251.062 95.6608 262.972 89.5466V106.806C259.15 119.608 252.845 125.021 246.986 125.021Z"/><path d="M367.358 135.594C388.439 135.594 399.457 120.181 399.457 103.494C399.457 89.9924 390.795 79.2927 384.49 70.5036L378.631 62.0967C373.663 55.0909 369.077 49.1041 369.077 40.3151C369.077 30.4433 374.937 21.3995 387.547 21.3995C400.03 21.3995 408.246 31.6534 405.571 51.2696H409.138L418.5 17.0049H414.806L411.749 24.3292C411.176 25.9214 409.966 26.3672 408.373 24.775C402.068 17.8329 395.636 14.6484 386.401 14.6484C366.02 14.6484 354.429 29.2969 354.429 45.4102C354.429 55.6641 358.951 62.861 364.428 70.5036L371.115 80.1843C378.44 90.1198 384.299 98.7815 384.299 108.717C384.299 117.952 379.331 128.397 366.02 128.397C350.034 128.397 342.137 110.946 345.067 94.387H341.5L330.991 134.256H335.067L337.87 126.04C339.016 122.792 340.672 121.964 342.837 124.13C349.27 130.881 356.785 135.594 367.358 135.594Z"/><path d="M440.409 61.2688H454.803L456.267 56.5558H441.874L448.752 37.7676H443.912C437.479 49.8048 430.601 56.5558 416.971 57.3201L415.379 61.2688H426.334L408.756 111.519C406.845 116.933 405.38 121.964 405.38 125.913C405.38 131.772 408.31 135.594 415.507 135.594C428.563 135.594 440.154 121.327 447.033 105.087H443.53C437.607 116.933 429.709 126.741 423.149 126.741C420.665 126.741 420.028 125.276 420.028 122.983C420.028 120.181 421.493 115.914 422.831 111.647L440.409 61.2688Z"/><path d="M459.07 136.294C470.916 136.294 482.507 121.327 498.302 89.6741H499.64L490.405 114.322C488.239 120.181 486.456 123.684 486.456 126.932C486.456 132.346 489.067 136.422 496.837 136.422C508.747 136.422 518.237 121.646 523.714 108.462H520.147C515.307 119.162 508.747 128.397 503.334 128.397C501.423 128.397 500.659 127.378 500.659 125.149C500.659 122.983 502.569 117.952 503.779 114.576L523.841 56.5558H506.836C506.391 67.574 497.602 85.7253 491.551 96.8709C480.278 118.398 471.617 126.04 466.394 126.04C464.483 126.04 463.273 124.576 463.464 121.327C463.846 114.767 471.935 97.3167 479.705 78.2737C482.507 71.6501 484.673 66.555 484.673 62.861C484.673 58.4665 482.189 54.6451 476.903 54.6451C466.203 54.6451 455.248 66.555 448.497 79.4201H452C457.605 70.1852 464.038 62.4152 468.432 62.4152C469.578 62.4152 470.343 62.9884 470.343 64.8991C470.343 67.1282 467.986 72.9876 466.203 77.8279C458.879 93.9412 448.497 114.895 448.497 125.913C448.497 131.9 452.128 136.294 459.07 136.294Z"/><path d="M582.244 127.633C580.206 127.633 579.633 126.486 579.633 124.257C579.633 122.219 581.353 117.124 582.563 113.748L615.681 13.7568L613.898 12.7378C610.14 15.9222 603.198 17.0049 586.639 17.0049L585.811 20.3805C596.065 20.3805 599.122 23.2465 596.319 31.4623L583.008 71.0769H582.69C583.136 61.7146 579.314 54.5177 569.506 54.5177C549.126 54.5177 525.561 90.5657 525.561 116.678C525.561 128.078 530.083 136.294 538.745 136.294C551.801 136.294 565.112 112.729 572.118 97.3167H574.219L568.806 113.303C566.704 119.289 565.239 122.792 565.239 126.168C565.239 131.454 567.914 135.594 575.684 135.594C587.53 135.594 597.211 120.754 602.497 107.698H599.122C594.154 118.398 587.721 127.633 582.244 127.633ZM544.859 125.722C541.356 125.722 540.018 121.773 540.018 114.895C540.018 94.0686 557.788 61.9693 570.844 61.9693C575.684 61.9693 577.404 65.6633 577.404 71.9685C577.404 76.8089 576.257 81.4581 574.665 86.1711C568.933 102.603 553.521 125.722 544.859 125.722Z"/><path d="M646.761 39.8692C652.302 39.8692 656.123 36.1752 656.123 30.7617C656.123 25.1571 652.302 21.6542 646.761 21.6542C641.156 21.6542 637.399 25.1571 637.399 30.7617C637.399 36.1752 641.156 39.8692 646.761 39.8692ZM615.362 113.43C613.324 119.289 611.732 122.792 611.732 126.168C611.732 131.454 614.343 135.594 622.113 135.594C634.151 135.594 643.704 120.754 648.99 107.698H645.615C640.774 118.398 634.151 127.633 628.737 127.633C626.699 127.633 626.062 126.486 626.062 124.257C626.062 122.219 627.973 117.124 629.183 113.876L641.921 78.2736C644.277 71.7774 646.188 66.6823 646.188 62.8609C646.188 58.5938 643.704 54.7724 638.418 54.7724C627.718 54.7724 616.7 66.5549 609.949 79.5474H613.452C619.056 70.3125 625.489 62.5425 629.884 62.5425C631.094 62.5425 631.794 63.1794 631.794 65.0263C631.794 67.1281 629.756 73.1148 627.973 77.9552L615.362 113.43Z"/><path d="M673.574 136.294C695.419 136.294 716.564 107.571 716.564 79.8659C716.564 64.4532 707.711 54.3267 694.719 54.3267C673.001 54.3267 651.92 83.2414 651.92 111.073C651.92 126.614 660.709 136.294 673.574 136.294ZM674.784 129.989C668.479 129.989 665.804 124.448 665.804 115.595C665.804 92.3489 681.089 60.5045 693.7 60.5045C699.941 60.5045 702.744 66.2365 702.744 75.1529C702.744 98.7815 687.395 129.989 674.784 129.989Z"/><path d="M722.423 34.3284V36.3027H726.181V46.1108H728.474V36.3027H732.232V34.3284H722.423ZM747.262 46.1108L746.37 34.3284H742.995L740.957 40.1241C740.702 41.0157 740.447 41.971 740.129 43.0538C739.811 41.8437 739.619 41.0157 739.301 40.0604L737.327 34.3284H733.824L732.932 46.1108H735.161L735.607 39.1687C735.671 38.086 735.734 36.9396 735.734 35.9206H735.862C736.117 36.9396 736.435 38.2771 736.626 39.2324L738.792 45.9198H741.212L743.313 39.4235C743.632 38.2771 744.014 36.9396 744.269 35.9206H744.396C744.46 37.1307 744.46 38.2771 744.524 39.1687L744.969 46.1108H747.262Z"/></svg></div>
+
+  <header class="head">
+    <p class="spec mono" id="spec"></p>
+    <div class="title-row">
+      <h1 class="title" id="title">Presentes</h1>
+      <button type="button" class="add" data-new aria-label="Adicionar presente"><i data-ph="plus"></i></button>
+    </div>
+    <div class="meter">
+      <div class="meter-row">
+        <span class="big" id="done-n"></span>
+        <span class="unit mono">itens prontos</span>
+      </div>
+      <div class="ticks" id="ticks" aria-hidden="true"></div>
+      <p class="meter-sub mono" id="sent"></p>
+    </div>
+  </header>
+
+  <div class="controls">
+    <label class="search">
+      <i data-ph="magnifying-glass"></i>
+      <input type="search" id="q" placeholder="Buscar pessoa ou item" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
+    </label>
+  </div>
+
+  <div id="view-people" class="view" aria-label="Por pessoa"></div>
+  <div id="view-make" class="view" aria-label="Produção" hidden></div>
+
+  <footer class="foot mono">
+    <span>Bova Studio · Natal 2026</span>
+    <span id="local-note"></span>
+  </footer>
+</main>
+
+<!-- barra de abas (iOS 26): cápsula de vidro flutuante, ícone sobre rótulo; enviar fica à parte -->
+<nav class="dock" aria-label="Visão">
+  <div class="tabs glass" role="tablist">
+    <button type="button" role="tab" data-view="people" aria-selected="true">
+      <i data-ph="users"></i>
+      <span>Pessoas</span>
+    </button>
+    <button type="button" role="tab" data-view="make" aria-selected="false">
+      <i data-ph="package"></i>
+      <span>Produção</span>
+    </button>
+  </div>
+  <button type="button" class="send glass" id="send" aria-label="Enviar marcações">
+    <i data-ph="export"></i>
+  </button>
+</nav>
+
+<!-- folha do produto (iOS sheet): arrastar para baixo, tocar fora ou Esc fecha -->
+<div class="sheet" id="sheet" hidden>
+  <div class="scrim" data-close></div>
+  <div class="panel" id="sh-panel" role="dialog" aria-modal="true" aria-labelledby="sh-name">
+    <span class="grabber" aria-hidden="true"></span>
+    <button type="button" class="close" id="sh-close" data-close aria-label="Fechar">
+      <svg class="i" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>
+    </button>
+    <div class="sh-img"><img id="sh-img" alt=""></div>
+    <p class="sh-src mono"><i data-ph="storefront"></i>Printi</p>
+    <h2 class="sh-name" id="sh-name"></h2>
+    <p class="sh-price" id="sh-price"></p>
+    <a class="btn-large" id="sh-link" target="_blank" rel="noopener"><i data-ph="arrow-square-out"></i>Abrir na Printi</a>
+    <p class="sh-seen mono" id="sh-seen"></p>
+  </div>
+</div>
+
+<!-- folha de edição: Cancelar, título e Salvar no topo, formulário agrupado embaixo -->
+<div class="sheet" id="editor" hidden>
+  <div class="scrim" data-close></div>
+  <div class="panel tall" role="dialog" aria-modal="true" aria-labelledby="ed-title">
+    <div class="ed-bar">
+      <button type="button" class="link" data-close>Cancelar</button>
+      <h2 class="ed-title" id="ed-title">Novo presente</h2>
+      <button type="button" class="link strong" id="ed-save">Salvar</button>
+    </div>
+    <div class="ed-body" id="ed-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+// Presentes de Natal 2026: a lista inteira mora aqui, em texto, e é a fonte da página.
+// Para atualizar, edite este bloco e publique. Nada além dele precisa mudar.
+//
+// Formato
+//   ## Nome                       uma pessoa (ou um casal) por bloco
+//   Descrição do presente         linha livre, aparece no cartão
+//   - [ ] Item · Quem             um item; "Quem" é Paulo, Erika, comprar ou a definir
+//   - [x] Item · Quem             [x] marca como feito
+//   - [ ] Item · Quem @ caneca    @ liga o item a um produto do catálogo abaixo (vários: @ quadro, azulejo)
+//   entregue                      linha sozinha: a pessoa já recebeu
+//
+// Itens com o mesmo nome e o mesmo "Quem" somam na aba Produção (ex.: 6 x Caneca · Paulo).
+// O que se marca no celular fica guardado só naquele aparelho até virar [x] aqui.
+
+// Planilha "Presentes · Natal 2026" (Google Drive do Bova): com a URL /exec do Apps Script aqui,
+// a página lê e grava nela, e este arquivo vira só a reserva para quando a planilha não responder.
+// https://docs.google.com/spreadsheets/d/12JzDX1yC_uJmdXw4FSGVcr-WJkRY-8SdK5vECUsaLgw/edit
+window.NATAL_SHEET = '';
+
+// Catálogo: produtos da Printi usados como base. Preço é o "a partir de" da página, visto na data abaixo.
+window.NATAL_PRODUCTS = {
+  seen: '14/11/2026',
+  agenda: { name: 'Agenda 2027 com capa impressa', url: 'https://www.printi.com.br/agenda-capa-impressa/', img: 'https://d1br4h274rc9sc.cloudfront.net/content/agenda_2026_small_image_644_x_800_1_00905a33de.webp', price: 48.54 },
+  caneca: { name: 'Caneca personalizada', url: 'https://www.printi.com.br/caneca-personalizada/', img: 'https://d1br4h274rc9sc.cloudfront.net/content/small_caneca1_0cc7c38797.webp', price: 39.51 },
+  caneca440: { name: 'Caneca grande 440ml', url: 'https://www.printi.com.br/caneca-grande-440ml-personalizada/', img: 'https://d1br4h274rc9sc.cloudfront.net/content/caneca_grande_440_small_image_644_x_800_5bde7a838c.png', price: 56.58 },
+  quadro: { name: 'Quadro decorativo', url: 'https://www.printi.com.br/quadro-decorativo/', img: 'https://d1br4h274rc9sc.cloudfront.net/content/quadro_01_5d07e207e8.png', price: 103.02 },
+  azulejo: { name: 'Azulejo personalizado', url: 'https://www.printi.com.br/azulejo-personalizado/', img: 'https://d1br4h274rc9sc.cloudfront.net/content/MAK_01196_Promoday_tratado_leg_small_image_644_x_800_b14fc21b83.webp', price: 35.75 },
+  sacola: { name: 'Sacola de papel Teepee', url: 'https://www.printi.com.br/sacola-de-papel-teepee/', img: 'https://d1br4h274rc9sc.cloudfront.net/content/small_sacola_papel_teepee1_dfb0e2c3dc.webp', price: 112.27 },
+  cesta: { name: 'Embalagem cesta personalizada', url: 'https://www.printi.com.br/embalagem-cesta/', img: 'https://d1br4h274rc9sc.cloudfront.net/content/Embalagem_Cesta_01_small_image_644_x_800_bf4c95b6a8.webp', price: 609.8 },
+};
+
+window.NATAL = `
+## Rosemary
+Agenda
+- [ ] Agenda · Paulo @ agenda
+
+## José Antônio
+Caneca de chopp
+- [ ] Caneca de chopp · Paulo @ caneca440
+
+## Karina
+Caneca na sacolinha com bombons ou mini chocotone
+- [ ] Caneca · a definir @ caneca
+- [ ] Bombons ou mini chocotone · comprar
+- [ ] Sacolinha · comprar @ sacola
+
+## Fabricio
+Caneca na sacolinha com chocolatinhos
+- [ ] Caneca · a definir @ caneca
+- [ ] Chocolatinhos · comprar
+- [ ] Sacolinha · comprar @ sacola
+
+## José Miguel
+Quadrinho ou azulejo
+- [ ] Quadrinho ou azulejo · Paulo @ quadro, azulejo
+
+## Vó e Vô
+Cesta com panetone e um quadrinho com a foto dos netos
+- [ ] Quadrinho com foto dos netos · a definir @ quadro
+- [ ] Panetone · comprar
+- [ ] Cesta · comprar @ cesta
+
+## Gustavo
+
+## Brendo
+
+## Lara
+Sacolinha com batom
+- [ ] Batom · comprar
+- [ ] Sacolinha · comprar @ sacola
+
+## Heloisa
+Pulseira capivara
+- [ ] Pulseira capivara · Erika
+
+## Rafael
+
+## Luzia
+
+## Paulo
+Caneca de chopp
+- [ ] Caneca de chopp · Paulo @ caneca440
+
+## Fernanda
+Sacolinha com caneca e chocolatinhos
+- [ ] Caneca · Paulo @ caneca
+- [ ] Chocolatinhos · comprar
+- [ ] Sacolinha · comprar @ sacola
+
+## Felipe
+Sacolinha com caneca e chocolatinhos
+- [ ] Caneca · Paulo @ caneca
+- [ ] Chocolatinhos · comprar
+- [ ] Sacolinha · comprar @ sacola
+
+## Beatriz
+Sacolinha com caneca e chocolatinhos
+- [ ] Caneca · Paulo @ caneca
+- [ ] Chocolatinhos · comprar
+- [ ] Sacolinha · comprar @ sacola
+
+## Eva
+Sacolinha com caneca e chocolatinhos
+- [ ] Caneca · Paulo @ caneca
+- [ ] Chocolatinhos · comprar
+- [ ] Sacolinha · comprar @ sacola
+
+## Manu
+Sacolinha com chocolatinhos
+- [ ] Chocolatinhos · comprar
+- [ ] Sacolinha · comprar @ sacola
+
+## Gi e Alan
+Sacolinha com chocolatinhos
+- [ ] Chocolatinhos · comprar
+- [ ] Sacolinha · comprar @ sacola
+`;
+
+</script>
+<script>
+// Ícones: Phosphor Regular (MIT), no lugar dos SF Symbols, por licença. Um path por ícone, viewBox 256.
+// ph('nome') devolve o <svg>; <i data-ph="nome"></i> no HTML vira ícone quando a página abre.
+window.PH = {
+  'paint-brush': 'M232 32a8 8 0 0 0-8-8c-44.08 0-89.31 49.71-114.43 82.63A60 60 0 0 0 32 164c0 30.88-19.54 44.73-20.47 45.37A8 8 0 0 0 16 224h76a60 60 0 0 0 57.37-77.57C182.3 121.31 232 76.08 232 32M92 208H34.63C41.38 198.41 48 183.92 48 164a44 44 0 1 1 44 44m32.42-94.45q5.14-6.66 10.09-12.55A76.2 76.2 0 0 1 155 121.49q-5.9 4.94-12.55 10.09a60.5 60.5 0 0 0-18.03-18.03m42.7-2.68a92.6 92.6 0 0 0-22-22c31.78-34.53 55.75-45 69.9-47.91c-2.85 14.16-13.37 38.13-47.9 69.91',
+  'hand-heart': 'M230.33 141.06a24.34 24.34 0 0 0-18.61-4.77C230.5 117.33 240 98.48 240 80c0-26.47-21.29-48-47.46-48A47.58 47.58 0 0 0 156 48.75A47.58 47.58 0 0 0 119.46 32C93.29 32 72 53.53 72 80c0 11 3.24 21.69 10.06 33a31.87 31.87 0 0 0-14.75 8.4L44.69 144H16a16 16 0 0 0-16 16v40a16 16 0 0 0 16 16h104a8 8 0 0 0 1.94-.24l64-16a7 7 0 0 0 1.19-.4L226 182.82l.44-.2a24.6 24.6 0 0 0 3.93-41.56ZM119.46 48a31.15 31.15 0 0 1 29.14 19a8 8 0 0 0 14.8 0a31.15 31.15 0 0 1 29.14-19C209.59 48 224 62.65 224 80c0 19.51-15.79 41.58-45.66 63.9l-11.09 2.55A28 28 0 0 0 140 112h-39.32C92.05 100.36 88 90.12 88 80c0-17.35 14.41-32 31.46-32M16 160h24v40H16Zm203.43 8.21l-38 16.18L119 200H56v-44.69l22.63-22.62A15.86 15.86 0 0 1 89.94 128H140a12 12 0 0 1 0 24h-28a8 8 0 0 0 0 16h32a8.3 8.3 0 0 0 1.79-.2l67-15.41l.31-.08a8.6 8.6 0 0 1 6.3 15.9Z',
+  'shopping-cart': 'M230.14 58.87A8 8 0 0 0 224 56H62.68L56.6 22.57A8 8 0 0 0 48.73 16H24a8 8 0 0 0 0 16h18l25.56 140.29a24 24 0 0 0 5.33 11.27a28 28 0 1 0 44.4 8.44h45.42a27.75 27.75 0 0 0-2.71 12a28 28 0 1 0 28-28H91.17a8 8 0 0 1-7.87-6.57L80.13 152h116a24 24 0 0 0 23.61-19.71l12.16-66.86a8 8 0 0 0-1.76-6.56M104 204a12 12 0 1 1-12-12a12 12 0 0 1 12 12m96 0a12 12 0 1 1-12-12a12 12 0 0 1 12 12m4-74.57a8 8 0 0 1-7.9 6.57H77.22L65.59 72h148.82Z',
+  'question': 'M140 180a12 12 0 1 1-12-12a12 12 0 0 1 12 12M128 72c-22.06 0-40 16.15-40 36v4a8 8 0 0 0 16 0v-4c0-11 10.77-20 24-20s24 9 24 20s-10.77 20-24 20a8 8 0 0 0-8 8v8a8 8 0 0 0 16 0v-.72c18.24-3.35 32-17.9 32-35.28c0-19.85-17.94-36-40-36m104 56A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88 88 0 1 0-88 88a88.1 88.1 0 0 0 88-88',
+  'gift': 'M216 72h-35.08c.39-.33.79-.65 1.17-1A29.53 29.53 0 0 0 192 49.57A32.62 32.62 0 0 0 158.44 16A29.53 29.53 0 0 0 137 25.91a55 55 0 0 0-9 14.48a55 55 0 0 0-9-14.48A29.53 29.53 0 0 0 97.56 16A32.62 32.62 0 0 0 64 49.57A29.53 29.53 0 0 0 73.91 71c.38.33.78.65 1.17 1H40a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16v64a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16v-64a16 16 0 0 0 16-16V88a16 16 0 0 0-16-16m-67-35.49a13.7 13.7 0 0 1 10-4.5h.49A16.62 16.62 0 0 1 176 49.08a13.7 13.7 0 0 1-4.5 10c-9.49 8.4-25.24 11.36-35 12.4c1.2-10.59 4.5-25.98 12.5-34.97m-64.09.36A16.63 16.63 0 0 1 96.59 32h.49a13.7 13.7 0 0 1 10 4.5c8.39 9.48 11.35 25.2 12.39 34.92c-9.72-1-25.44-4-34.92-12.39a13.7 13.7 0 0 1-4.5-10a16.6 16.6 0 0 1 4.82-12.16ZM40 88h80v32H40Zm16 48h64v64H56Zm144 64h-64v-64h64Zm16-80h-80V88h80z',
+  'pencil-simple': 'm227.31 73.37l-44.68-44.69a16 16 0 0 0-22.63 0L36.69 152A15.86 15.86 0 0 0 32 163.31V208a16 16 0 0 0 16 16h44.69a15.86 15.86 0 0 0 11.31-4.69L227.31 96a16 16 0 0 0 0-22.63M92.69 208H48v-44.69l88-88L180.69 120ZM192 108.68L147.31 64l24-24L216 84.68Z',
+  'users': 'M117.25 157.92a60 60 0 1 0-66.5 0a95.83 95.83 0 0 0-47.22 37.71a8 8 0 1 0 13.4 8.74a80 80 0 0 1 134.14 0a8 8 0 0 0 13.4-8.74a95.83 95.83 0 0 0-47.22-37.71M40 108a44 44 0 1 1 44 44a44.05 44.05 0 0 1-44-44m210.14 98.7a8 8 0 0 1-11.07-2.33A79.83 79.83 0 0 0 172 168a8 8 0 0 1 0-16a44 44 0 1 0-16.34-84.87a8 8 0 1 1-5.94-14.85a60 60 0 0 1 55.53 105.64a95.83 95.83 0 0 1 47.22 37.71a8 8 0 0 1-2.33 11.07',
+  'package': 'm223.68 66.15l-88-48.15a15.88 15.88 0 0 0-15.36 0l-88 48.17a16 16 0 0 0-8.32 14v95.64a16 16 0 0 0 8.32 14l88 48.17a15.88 15.88 0 0 0 15.36 0l88-48.17a16 16 0 0 0 8.32-14V80.18a16 16 0 0 0-8.32-14.03M128 32l80.34 44l-29.77 16.3l-80.35-44Zm0 88L47.66 76l33.9-18.56l80.34 44ZM40 90l80 43.78v85.79l-80-43.75Zm176 85.78l-80 43.79v-85.75l32-17.51V152a8 8 0 0 0 16 0v-44.45L216 90v85.77Z',
+  'export': 'M216 112v96a16 16 0 0 1-16 16H56a16 16 0 0 1-16-16v-96a16 16 0 0 1 16-16h24a8 8 0 0 1 0 16H56v96h144v-96h-24a8 8 0 0 1 0-16h24a16 16 0 0 1 16 16M93.66 69.66L120 43.31V136a8 8 0 0 0 16 0V43.31l26.34 26.35a8 8 0 0 0 11.32-11.32l-40-40a8 8 0 0 0-11.32 0l-40 40a8 8 0 0 0 11.32 11.32',
+  'magnifying-glass': 'm229.66 218.34l-50.07-50.06a88.11 88.11 0 1 0-11.31 11.31l50.06 50.07a8 8 0 0 0 11.32-11.32M40 112a72 72 0 1 1 72 72a72.08 72.08 0 0 1-72-72',
+  'user': 'M230.92 212c-15.23-26.33-38.7-45.21-66.09-54.16a72 72 0 1 0-73.66 0c-27.39 8.94-50.86 27.82-66.09 54.16a8 8 0 1 0 13.85 8c18.84-32.56 52.14-52 89.07-52s70.23 19.44 89.07 52a8 8 0 1 0 13.85-8M72 96a56 56 0 1 1 56 56a56.06 56.06 0 0 1-56-56',
+  'arrow-square-out': 'M224 104a8 8 0 0 1-16 0V59.32l-66.33 66.34a8 8 0 0 1-11.32-11.32L196.68 48H152a8 8 0 0 1 0-16h64a8 8 0 0 1 8 8Zm-40 24a8 8 0 0 0-8 8v72H48V80h72a8 8 0 0 0 0-16H48a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16v-72a8 8 0 0 0-8-8',
+  'trash': 'M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16M96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0m48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0',
+  'arrow-counter-clockwise': 'M224 128a96 96 0 0 1-94.71 96H128a95.38 95.38 0 0 1-65.9-26.2a8 8 0 0 1 11-11.63a80 80 0 1 0-1.67-114.78a3 3 0 0 1-.26.25L44.59 96H72a8 8 0 0 1 0 16H24a8 8 0 0 1-8-8V56a8 8 0 0 1 16 0v29.8L60.25 60A96 96 0 0 1 224 128',
+  'plus': 'M224 128a8 8 0 0 1-8 8h-80v80a8 8 0 0 1-16 0v-80H40a8 8 0 0 1 0-16h80V40a8 8 0 0 1 16 0v80h80a8 8 0 0 1 8 8',
+  'storefront': 'M232 96a8 8 0 0 0-.3-2.2l-14.35-50.2A16.07 16.07 0 0 0 202 32H54a16.07 16.07 0 0 0-15.35 11.6L24.31 93.8A8 8 0 0 0 24 96v16a40 40 0 0 0 16 32v72a8 8 0 0 0 8 8h160a8 8 0 0 0 8-8v-72a40 40 0 0 0 16-32zM54 48h148l11.42 40H42.61Zm50 56h48v8a24 24 0 0 1-48 0Zm-16 0v8a24 24 0 0 1-35.12 21.26a8 8 0 0 0-1.82-1.06A24 24 0 0 1 40 112v-8Zm112 104H56v-56.8a40.6 40.6 0 0 0 8 .8a40 40 0 0 0 32-16a40 40 0 0 0 64 0a40 40 0 0 0 32 16a40.6 40.6 0 0 0 8-.8Zm4.93-75.8a8 8 0 0 0-1.8 1.05A24 24 0 0 1 168 112v-8h48v8a24 24 0 0 1-11.07 20.2',
+};
+window.ph = (name, cls = '') => `<svg class="ph${cls ? ` ${cls}` : ''}" viewBox="0 0 256 256" aria-hidden="true"><path d="${window.PH[name]}"/></svg>`;
+document.querySelectorAll('i[data-ph]').forEach((el) => { el.outerHTML = window.ph(el.dataset.ph, el.className); });
+
+</script>
+<script>
+// Studio Design System: campo de pontos do fundo, comum a todas as páginas do Studio.
+// O pattern da Bova (ponto de 2 px em grade de 16) acende como luz em volta do ponteiro.
+// A cor da luz é --dot-light (cada página põe a do seu acento; o hub usa branco).
+// window.dotLight(hex) troca a cor na hora; window.dotLight(null) volta à da página.
+// Sem ponteiro, a luz descansa no canto de baixo à direita. prefers-reduced-motion: a luz fica parada.
+
+(() => {
+  const cv = document.getElementById('dots');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const css = getComputedStyle(document.documentElement);
+  const DEFAULT = (css.getPropertyValue('--dot-light') || '#FFFFFF').trim();
+  const BASE = (css.getPropertyValue('--color-dot-base') || '#2A2929').trim();
+  const toRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  let rgb = toRgb(DEFAULT);
+  const GRID = 16;
+  const RADIUS = 220;
+  const BASE_ALPHA = 0.07;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let W = 0; let H = 0; let dpr = 1;
+  const rest = () => ({ x: W - 24, y: H * 0.6 });
+  let target = null; let pos = null; let raf = 0;
+
+  function size() {
+    dpr = Math.min(2, devicePixelRatio || 1);
+    W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (!target) target = rest();
+    if (!pos) pos = { ...target };
+    draw();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const r2 = RADIUS * RADIUS;
+    for (let y = GRID / 2; y < H; y += GRID) {
+      for (let x = GRID / 2; x < W; x += GRID) {
+        const dx = x - pos.x; const dy = y - pos.y;
+        const lv = Math.exp(-(dx * dx + dy * dy) / r2 * 2.2);
+        const a = BASE_ALPHA + lv * 0.6;
+        const rr = 1 + lv * 0.6;
+        ctx.fillStyle = lv > 0.02 ? `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a.toFixed(3)})` : BASE;
+        ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+  }
+
+  // A luz segue o ponteiro com atraso (lerp), para ler como luz e não como cursor.
+  function tick() {
+    pos.x += (target.x - pos.x) * 0.14;
+    pos.y += (target.y - pos.y) * 0.14;
+    draw();
+    raf = Math.hypot(target.x - pos.x, target.y - pos.y) > 0.5 ? requestAnimationFrame(tick) : 0;
+  }
+  function aim(x, y) {
+    target = { x, y };
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  window.dotLight = (hex) => { rgb = toRgb(hex || DEFAULT); draw(); };
+
+  addEventListener('resize', size);
+  if (!still) {
+    addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') aim(e.clientX, e.clientY); }, { passive: true });
+    document.addEventListener('mouseleave', () => { const r = rest(); aim(r.x, r.y); });
+  }
+  size();
+})();
+
+</script>
+<script>
+// Presentes · Natal 2026. Lê o texto de data.js, desenha Pessoas e Produção no padrão do iOS:
+// título grande que vira barra compacta, busca, seções que abrem e fecham, cartão por pessoa, switch de entregue,
+// folha (sheet) do produto, folha de edição e barra de abas de vidro.
+//
+// Página estática, sem servidor: tudo o que se muda aqui (marcar, adicionar, editar, apagar) fica
+// guardado só neste aparelho. O botão de enviar manda essas mudanças como texto, já no formato do
+// data.js, para entrarem no arquivo. Quando o arquivo passa a dizer o mesmo, a mudança local some sozinha.
+
+(() => {
+  const KEY = 'natal-2026';
+  const KEY_EDITS = 'natal-2026-edits';
+  const OWNERS = { paulo: 'Paulo', erika: 'Erika', comprar: 'Comprar', 'a definir': 'A definir' };
+  const ORDER = ['Paulo', 'Erika', 'Comprar', 'A definir'];
+  const PRODUCTS = window.NATAL_PRODUCTS || {};
+  let PRODUCT_KEYS = Object.keys(PRODUCTS).filter((k) => PRODUCTS[k] && PRODUCTS[k].url);
+  // planilha: com a URL do Apps Script em data.js, a página lê e grava nela (modo ao vivo).
+  // Sem a URL, ou enquanto a planilha não responde, vale o texto de data.js e as mudanças ficam no aparelho.
+  const API = window.NATAL_SHEET || '';
+  let live = false;
+  const CHECK = '<svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+  const CHEV = '<svg class="i chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>';
+  const PLUS = ph('plus');
+  const OWNER_ICON = { Paulo: 'paint-brush', Erika: 'hand-heart', Comprar: 'shopping-cart', 'A definir': 'question' };
+  const ownerIcon = (o) => ph(OWNER_ICON[o] || 'user');
+  const MINUS = '<svg class="i" viewBox="0 0 24 24"><path d="M6 12h12"/></svg>';
+  const brl = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const load = (k) => { try { return JSON.parse(localStorage.getItem(k) || '{}') || {}; } catch { return {}; } };
+  const store = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* sem armazenamento: vale só nesta visita */ } };
+
+  // ---------- leitura do texto ----------
+  function parse(src) {
+    const people = [];
+    let p = null;
+    for (const raw of src.split('\n')) {
+      const line = raw.trim();
+      if (!line) continue;
+      if (line.startsWith('## ')) { p = { name: line.slice(3).trim(), desc: '', items: [], given: false }; people.push(p); continue; }
+      if (!p) continue;
+      const m = line.match(/^- \[( |x|X)\]\s+(.+)$/);
+      if (m) {
+        const [main, refs = ''] = m[2].split(' @ ');
+        const [label, who = 'a definir'] = main.split(' · ').map((s) => s.trim());
+        const owner = OWNERS[who.toLowerCase()] || who;
+        const products = refs.split(',').map((k) => k.trim()).filter((k) => PRODUCTS[k]);
+        p.items.push({ label, owner, products, file: m[1] !== ' ' });
+      } else if (line.toLowerCase() === 'entregue') p.given = true;
+      else p.desc = line;
+    }
+    return people;
+  }
+  // a parte editável de uma pessoa, para comparar edição com arquivo
+  const shape = (p) => JSON.stringify({ name: p.name, desc: p.desc, items: p.items.map((it) => [it.label, it.owner, it.products]) });
+
+  // ---------- estado: arquivo + mudanças deste aparelho ----------
+  let filePeople = parse(window.NATAL || '');
+  let local = load(KEY);        // marcas: id -> true/false
+  let edits = load(KEY_EDITS);  // pessoas: chave -> { name, desc, items } ou null (apagada); chave "new:..." é presente novo
+  let people = [];
+  const fileVal = new Map();
+
+  function build() {
+    // edição que o arquivo já confirma (ou que aponta para pessoa que saiu do arquivo) é descartada
+    for (const k of Object.keys(edits)) {
+      const orig = filePeople.find((p) => p.name === k);
+      if (k.startsWith('new:')) { if (edits[k] && filePeople.some((p) => shape(p) === shape(edits[k]))) delete edits[k]; continue; }
+      if (!orig) { delete edits[k]; continue; }
+      if (edits[k] && shape(orig) === shape(edits[k])) delete edits[k];
+    }
+    store(KEY_EDITS, edits);
+    people = [];
+    for (const p of filePeople) {
+      if (!(p.name in edits)) { people.push({ ...p, key: p.name }); continue; }
+      const e = edits[p.name];
+      if (e) people.push({ ...e, given: p.given, key: p.name, edited: true });
+    }
+    for (const k of Object.keys(edits)) if (k.startsWith('new:') && edits[k]) people.push({ ...edits[k], given: false, key: k, added: true });
+    fileVal.clear();
+    for (const p of people) {
+      p.givenId = `${p.name}::entregue`;
+      fileVal.set(p.givenId, !!p.given);
+      for (const it of p.items) { it.id = `${p.name}::${it.label}`; fileVal.set(it.id, !!it.file); }
+    }
+    for (const id of Object.keys(local)) if (!fileVal.has(id) || fileVal.get(id) === local[id]) delete local[id];
+    store(KEY, local);
+  }
+
+  const val = (id) => (id in local ? local[id] : fileVal.get(id));
+  const isLocal = (id) => id in local;
+  function toggle(id) {
+    if (live) { toggleLive(id); return; }
+    const next = !val(id);
+    if (next === fileVal.get(id)) delete local[id]; else local[id] = next;
+    store(KEY, local); render();
+  }
+
+  // ---------- desenho ----------
+  let view = 'people';
+  let filter = 'all';
+  let query = '';
+  const open = new Set();
+  const $ = (id) => document.getElementById(id);
+  const match = (...texts) => !query || texts.some((t) => norm(t).includes(query));
+
+  const LOCAL_DOT = '<span class="local" title="Mudado neste aparelho"></span>';
+  const thumb = (k) => `<button type="button" class="thumb" data-product="${k}" aria-label="${esc(PRODUCTS[k].name)}"><img src="${PRODUCTS[k].img}" alt="" loading="lazy" onerror="this.parentNode.classList.add('broken')"></button>`;
+  const itemRow = (id, label, who, products = []) => `
+    <div class="row">
+      <button type="button" class="item" role="checkbox" aria-checked="${val(id)}" data-id="${esc(id)}">
+        <span class="box">${CHECK}</span>
+        <span class="label">${esc(label)}${who ? `<span class="who${who === 'A definir' ? ' tbd' : ''}">${ownerIcon(who)}${esc(who)}</span>` : ''}</span>
+        ${isLocal(id) ? LOCAL_DOT : ''}
+      </button>
+      ${products.map(thumb).join('')}
+    </div>`;
+  const productRow = (k) => { const pr = PRODUCTS[k]; return `
+    <button type="button" class="row prod" data-product="${k}">
+      <span class="prod-img"><img src="${pr.img}" alt="" loading="lazy" onerror="this.parentNode.classList.add('broken')"></span>
+      <span class="prod-text"><span class="prod-name">${esc(pr.name)}</span><span class="prod-price">${ph('storefront')}Printi · a partir de ${brl(pr.price)}</span></span>
+      ${CHEV}
+    </button>`; };
+
+  // seções da lista (como as faixas do dia num planner): cada pessoa cai numa só, pelo estado dela
+  const SECTIONS = [
+    { id: 'todo', label: 'A fazer', icon: 'paint-brush' },
+    { id: 'ready', label: 'Pronto para entregar', icon: 'gift' },
+    { id: 'tbd', label: 'Sem presente', icon: 'question' },
+    { id: 'given', label: 'Entregues', icon: 'hand-heart' },
+  ];
+  const KEY_UI = 'natal-2026-ui';
+  const ui = Object.assign({ closed: { given: true } }, load(KEY_UI));
+  const saveUi = () => store(KEY_UI, ui);
+  const openP = new Set();
+  const sectionOf = (p) => {
+    if (val(p.givenId)) return 'given';
+    if (!p.items.length) return 'tbd';
+    return p.items.every((it) => val(it.id)) ? 'ready' : 'todo';
+  };
+  // anel de progresso: itens feitos sobre o total, com o número no meio
+  const ring = (done, total, full) => {
+    const c = 2 * Math.PI * 13; const f = total ? done / total : 0;
+    return `<span class="ring${full ? ' full' : ''}" aria-label="${done} de ${total} itens prontos">
+      <svg class="rg" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" class="trk"/><circle cx="16" cy="16" r="13" class="val${done ? '' : ' zero'}" stroke-dasharray="${(f * c).toFixed(2)} ${c.toFixed(2)}"/></svg>
+      ${full ? CHECK : `<b>${done}</b>`}</span>`;
+  };
+  const avatar = (p) => {
+    const k = p.items.flatMap((it) => it.products)[0];
+    return k && PRODUCTS[k] ? `<span class="avatar"><img src="${PRODUCTS[k].img}" alt="" loading="lazy" onerror="this.parentNode.classList.add('broken')"></span>`
+      : `<span class="avatar icon">${ph(p.items.length ? 'gift' : 'question')}</span>`;
+  };
+  const chip = (id, icon, label, n, closed, extra = '') => `
+    <button type="button" class="chip" data-sec="${id}" aria-expanded="${!closed}">${ph(icon)}<span>${esc(label)}</span><span class="n">${n}</span>${extra}${CHEV}</button>`;
+
+  function personCard(p) {
+    const given = val(p.givenId);
+    const done = p.items.filter((it) => val(it.id)).length;
+    const hitName = match(p.name, p.desc);
+    const items = p.items.filter((it) => hitName || match(it.label, it.owner));
+    const isOpen = openP.has(p.key) || (!!query && !hitName);
+    const owners = [...new Set(p.items.map((it) => it.owner))].join(', ');
+    const mark = p.added ? '<span class="tag mono">novo</span>' : p.edited ? '<span class="tag mono">editado</span>' : '';
+    const meta = p.items.length ? `${p.items.length} ${p.items.length > 1 ? 'itens' : 'item'} · ${owners}` : 'Presente a definir';
+    return `
+      <article class="pcard${isOpen ? ' open' : ''}${given ? ' given' : ''}">
+        <button type="button" class="p-head" data-person="${esc(p.key)}" aria-expanded="${isOpen}">
+          ${avatar(p)}
+          <span class="p-text">
+            <span class="p-name">${esc(p.name)}${mark}</span>
+            ${p.desc ? `<span class="p-desc">${esc(p.desc)}</span>` : ''}
+            <span class="p-meta">${esc(meta)}</span>
+          </span>
+          ${p.items.length ? ring(done, p.items.length, given) : ''}
+        </button>
+        ${isOpen ? `<div class="p-body">
+          ${items.map((it) => itemRow(it.id, it.label, it.owner, it.products)).join('')}
+          <div class="row p-foot">
+            <button type="button" class="link" data-edit="${esc(p.key)}">${ph('pencil-simple')}${p.items.length ? 'Editar' : 'Definir presente'}</button>
+            ${p.items.length ? `<span class="spacer"></span><span class="sw-label">${ph('gift')}Entregue</span>${isLocal(p.givenId) ? LOCAL_DOT : ''}
+            <button type="button" class="switch" role="switch" aria-checked="${given}" aria-label="${esc(p.name)} entregue" data-id="${esc(p.givenId)}"><span></span></button>` : ''}
+          </div>
+        </div>` : ''}
+      </article>`;
+  }
+
+  function renderPeople() {
+    const shown = people.filter((p) => match(p.name, p.desc, ...p.items.flatMap((it) => [it.label, it.owner])));
+    const out = [];
+    for (const sec of SECTIONS) {
+      const list = shown.filter((p) => sectionOf(p) === sec.id);
+      if (!list.length) continue;
+      const closed = !query && !!ui.closed[sec.id];
+      out.push(`<section class="sec-block">${chip(sec.id, sec.icon, sec.label, list.length, closed)}
+        ${closed ? '' : `<div class="cards">${list.map(personCard).join('')}</div>`}</section>`);
+    }
+    if (!query) out.push(`<button type="button" class="add-row" data-new>${PLUS}<span>Adicionar presente</span></button>`);
+    $('view-people').innerHTML = out.join('') || '<p class="none">Nada encontrado.</p>';
+  }
+
+  function renderMake() {
+    const by = new Map();
+    for (const p of people) for (const it of p.items) {
+      if (!by.has(it.owner)) by.set(it.owner, new Map());
+      const g = by.get(it.owner);
+      if (!g.has(it.label)) g.set(it.label, []);
+      g.get(it.label).push({ ...it, person: p.name });
+    }
+    const owners = [...by.keys()].sort((a, b) => (ORDER.indexOf(a) + 1 || 99) - (ORDER.indexOf(b) + 1 || 99));
+    const out = [];
+    for (const o of owners) {
+      const groups = [...by.get(o)].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+      const rows = [];
+      let total = 0; let made = 0;
+      for (const [label, list] of groups) {
+        const done = list.filter((x) => val(x.id)).length;
+        total += list.length; made += done;
+        if (filter === 'open' && done === list.length) continue;
+        if (!match(label, o, ...list.map((x) => x.person))) continue;
+        const key = `${o}::${label}`;
+        const isOpen = open.has(key) || !!query;
+        const shown = list.filter((x) => filter === 'all' || !val(x.id));
+        const prods = [...new Set(list.flatMap((x) => x.products))];
+        rows.push(`
+          <div class="disclosure${done === list.length ? ' done' : ''}${isOpen ? ' open' : ''}">
+            <button type="button" class="row make" data-key="${esc(key)}" aria-expanded="${isOpen}">
+              <span class="qty">${list.length}<small>x</small></span>
+              <span class="label">${esc(label)}</span>
+              <span class="g-count">${done}/${list.length}</span>
+              ${CHEV}
+            </button>
+            ${isOpen ? `<div class="sub">${prods.map(productRow).join('')}${shown.map((x) => itemRow(x.id, x.person, '')).join('')}</div>` : ''}
+          </div>`);
+      }
+      if (!rows.length && query) continue;
+      const closed = !query && !!ui.closed[`make:${o}`];
+      out.push(`<section class="sec-block">${chip(`make:${o}`, OWNER_ICON[o] || 'user', o, `${made}/${total}`, closed)}
+        ${closed ? '' : `<div class="list">${rows.join('') || '<div class="row empty">Tudo pronto aqui</div>'}</div>`}</section>`);
+    }
+    $('view-make').innerHTML = out.join('') || '<p class="none">Nada encontrado.</p>';
+  }
+
+  const changes = () => Object.keys(local).length + Object.keys(edits).length;
+  function renderHead() {
+    const all = people.flatMap((p) => p.items);
+    const done = all.filter((it) => val(it.id)).length;
+    const withGift = people.filter((p) => p.items.length);
+    const tbd = people.length - withGift.length;
+    const given = people.filter((p) => val(p.givenId)).length;
+    $('spec').textContent = `Natal 2026 · ${people.length} pessoas · ${all.length} itens`;
+    $('done-n').innerHTML = `${done}<b>/${all.length}</b>`;
+    $('nav-count').textContent = `${done}/${all.length}`;
+    $('ticks').innerHTML = all.map((it) => `<span class="${val(it.id) ? 'on' : ''}"></span>`).join('');
+    $('sent').textContent = `${given} de ${withGift.length} entregues`;
+    const n = changes();
+    const send = $('send');
+    if (n) send.dataset.n = n; else delete send.dataset.n;
+    $('send').hidden = live;
+    $('local-note').textContent = live ? (syncedAt ? `Planilha · ${syncedAt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}` : 'Planilha')
+      : API ? 'Sem conexão com a planilha' : n ? `${n} mudança${n > 1 ? 's' : ''} só neste aparelho` : '';
+  }
+
+  function render() {
+    renderHead();
+    if (view === 'people') renderPeople(); else renderMake();
+    $('view-people').hidden = view !== 'people';
+    $('view-make').hidden = view !== 'make';
+  }
+
+  // ---------- folhas (produto e edição) ----------
+  let lastFocus = null;
+  function showSheet(el, focus) {
+    lastFocus = document.activeElement;
+    el.hidden = false;
+    requestAnimationFrame(() => el.classList.add('on'));
+    document.body.classList.add('locked');
+    if (focus) focus.focus({ preventScroll: true });
+  }
+  function hideSheet(el) {
+    if (el.hidden) return;
+    el.classList.remove('on');
+    document.body.classList.remove('locked');
+    setTimeout(() => { el.hidden = true; el.querySelector('.panel').style.transform = ''; }, 280);
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
+  }
+  const sheet = $('sheet');
+  function openProduct(k) {
+    const pr = PRODUCTS[k]; if (!pr) return;
+    $('sh-img').src = pr.img;
+    $('sh-name').textContent = pr.name;
+    $('sh-price').textContent = `a partir de ${brl(pr.price)}`;
+    $('sh-seen').textContent = PRODUCTS.seen ? `Preço visto em ${PRODUCTS.seen}` : '';
+    $('sh-link').href = pr.url;
+    showSheet(sheet, $('sh-close'));
+  }
+  // arrastar para baixo fecha a folha do produto, como no iOS
+  (() => {
+    const panel = $('sh-panel'); let y0 = null; let dy = 0;
+    panel.addEventListener('touchstart', (e) => { y0 = e.touches[0].clientY; dy = 0; panel.style.transition = 'none'; }, { passive: true });
+    panel.addEventListener('touchmove', (e) => { if (y0 === null) return; dy = Math.max(0, e.touches[0].clientY - y0); panel.style.transform = `translateY(${dy}px)`; }, { passive: true });
+    panel.addEventListener('touchend', () => { panel.style.transition = ''; if (dy > 90) hideSheet(sheet); else panel.style.transform = ''; y0 = null; });
+  })();
+
+  // ---------- edição: rascunho em memória, desenhado na folha ----------
+  const editor = $('editor');
+  let draft = null; // { key, name, desc, items: [{ label, owner, products, file }] }
+  const OWNER_OPTS = ['Paulo', 'Erika', 'Comprar', 'A definir'];
+
+  function openEditor(key) {
+    const p = key ? people.find((x) => x.key === key) : null;
+    draft = p
+      ? { key: p.key, name: p.name, desc: p.desc, items: p.items.map((it) => ({ label: it.label, owner: it.owner, products: [...it.products], file: it.file })) }
+      : { key: null, name: '', desc: '', items: [{ label: '', owner: 'Paulo', products: [], file: false }] };
+    $('ed-title').textContent = p ? 'Editar presente' : 'Novo presente';
+    renderEditor();
+    showSheet(editor, p ? null : $('ed-name'));
+    $('ed-body').scrollTop = 0;
+  }
+
+  function renderEditor() {
+    const d = draft;
+    const canDelete = !!d.key;
+    const revert = d.key && !d.key.startsWith('new:') && d.key in edits;
+    $('ed-body').innerHTML = `
+      <p class="f-head">Pessoa</p>
+      <div class="list form">
+        <label class="field"><span>${ph('user')}Nome</span><input id="ed-name" data-f="name" value="${esc(d.name)}" placeholder="Quem recebe" autocomplete="off" enterkeyhint="next"></label>
+        <label class="field"><span>${ph('gift')}Presente</span><input data-f="desc" value="${esc(d.desc)}" placeholder="Ex.: caneca e chocolate" autocomplete="off" enterkeyhint="done"></label>
+      </div>
+      <p class="f-head">Itens</p>
+      ${d.items.map((it, i) => `
+        <div class="list form item-form">
+          <div class="field">
+            <input data-i="${i}" data-f="label" value="${esc(it.label)}" placeholder="Item, ex.: Caneca" autocomplete="off" aria-label="Item ${i + 1}">
+            <button type="button" class="remove" data-remove="${i}" aria-label="Remover item">${MINUS}</button>
+          </div>
+          <div class="field col">
+            <span>${ph('paint-brush')}Quem faz</span>
+            <div class="seg4">${OWNER_OPTS.map((o) => `<button type="button" data-i="${i}" data-owner="${o}" aria-pressed="${it.owner === o}">${ownerIcon(o)}<span>${o}</span></button>`).join('')}</div>
+          </div>
+          <div class="field col">
+            <span>${ph('storefront')}Produto Printi</span>
+            <div class="picks">${PRODUCT_KEYS.map((k) => `<button type="button" class="pick" data-i="${i}" data-pick="${k}" aria-pressed="${it.products.includes(k)}" title="${esc(PRODUCTS[k].name)}"><img src="${PRODUCTS[k].img}" alt="${esc(PRODUCTS[k].name)}" loading="lazy"></button>`).join('')}</div>
+            <span class="pick-name">${it.products.length ? esc(it.products.map((k) => PRODUCTS[k].name).join(', ')) : 'Nenhum'}</span>
+          </div>
+        </div>`).join('')}
+      <button type="button" class="list add-row" data-add-item>${PLUS}<span>Adicionar item</span></button>
+      ${revert ? `<button type="button" class="list action" data-revert>${ph('arrow-counter-clockwise')}Desfazer edição deste aparelho</button>` : ''}
+      ${canDelete ? `<button type="button" class="list action danger" data-delete>${ph('trash')}Apagar presente</button>` : ''}
+      <p class="f-note">${live ? 'Salva direto na planilha, para todo mundo.' : 'Fica salvo neste aparelho. Use o botão de enviar para mandar ao Paulo.'}</p>`;
+  }
+
+  function saveEditor() {
+    const d = draft;
+    const name = d.name.trim();
+    if (!name) { toast('Escreva o nome de quem recebe.'); $('ed-name').focus(); return; }
+    const clash = people.find((p) => p.name.toLowerCase() === name.toLowerCase() && p.key !== d.key);
+    if (clash) { toast('Já existe alguém com esse nome.'); return; }
+    const seen = new Set();
+    const items = [];
+    for (const it of d.items) {
+      const label = it.label.trim();
+      if (!label || seen.has(label.toLowerCase())) continue;
+      seen.add(label.toLowerCase());
+      items.push({ label, owner: it.owner, products: it.products, file: !!it.file });
+    }
+    const rec = { name, desc: d.desc.trim(), items };
+    if (live) { saveLive(d.key, rec); return; }
+    const key = d.key || `new:${Date.now()}`;
+    // marcas acompanham a pessoa e o item quando o nome muda; o [x] do arquivo segue com o item
+    const old = d.key ? people.find((p) => p.key === d.key) : null;
+    if (old) {
+      for (const it of old.items) {
+        const now = items.find((x) => x.label === it.label); if (!now) continue;
+        now.file = !!fileVal.get(it.id);
+        const nid = `${name}::${now.label}`;
+        if (it.id in local && nid !== it.id) { local[nid] = local[it.id]; delete local[it.id]; }
+      }
+      const ng = `${name}::entregue`;
+      if (old.givenId in local && ng !== old.givenId) { local[ng] = local[old.givenId]; delete local[old.givenId]; }
+    }
+    edits[key] = rec;
+    store(KEY_EDITS, edits); store(KEY, local);
+    build(); render();
+    hideSheet(editor);
+    toast(d.key ? 'Presente atualizado neste aparelho.' : 'Presente adicionado neste aparelho.');
+  }
+
+  function deletePerson() {
+    if (!draft.key) return;
+    if (!confirm(`Apagar o presente de ${draft.name || 'esta pessoa'}?`)) return;
+    if (live) { deleteLive(draft.key); return; }
+    if (draft.key.startsWith('new:')) delete edits[draft.key]; else edits[draft.key] = null;
+    store(KEY_EDITS, edits);
+    build(); render(); hideSheet(editor);
+    toast('Presente apagado neste aparelho.');
+  }
+
+
+  // ---------- planilha (modo ao vivo) ----------
+  let pending = 0;
+  let syncedAt = null;
+  function applyServer(j) {
+    filePeople = j.people.map((p) => ({ name: p.name, desc: p.desc || '', given: !!p.given,
+      items: p.items.map((it) => ({ label: it.label, owner: it.owner, products: (it.products || []).filter((k) => j.products[k] || PRODUCTS[k]), file: !!it.done })) }));
+    for (const k of Object.keys(PRODUCTS)) if (k !== 'seen') delete PRODUCTS[k];
+    Object.assign(PRODUCTS, j.products);
+    PRODUCT_KEYS = Object.keys(PRODUCTS).filter((k) => PRODUCTS[k] && PRODUCTS[k].url);
+    const seen = Object.values(j.products).map((x) => x.seen).find(Boolean);
+    if (seen) PRODUCTS.seen = seen;
+    syncedAt = new Date(j.updated || Date.now());
+    if (!live) { live = true; local = {}; edits = {}; store(KEY, local); store(KEY_EDITS, edits); }
+    build(); render();
+  }
+  async function pull() {
+    if (!API || pending || !editor.hidden) return;
+    try {
+      const r = await fetch(API, { cache: 'no-store' });
+      const j = await r.json();
+      if (!j.ok || !Array.isArray(j.people)) throw new Error(j.error || 'resposta vazia');
+      if (!pending && editor.hidden) applyServer(j);
+    } catch (err) { if (!live) renderHead(); }
+  }
+  async function post(body) {
+    pending += 1;
+    try {
+      const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+      const j = await r.json().catch(() => ({ ok: false, error: `resposta ${r.status}` }));
+      if (!j.ok) throw new Error(j.error || 'erro desconhecido');
+      pending -= 1;
+      if (!pending) applyServer(j);
+      return j;
+    } catch (err) { pending -= 1; throw err; }
+  }
+  function toggleLive(id) {
+    const [name, label] = id.split('::');
+    const p = filePeople.find((x) => x.name === name); if (!p) return;
+    const isGiven = id === `${name}::entregue`;
+    const it = isGiven ? null : p.items.find((x) => x.label === label);
+    const next = !val(id);
+    const set = (v) => { if (isGiven) p.given = v; else if (it) it.file = v; build(); render(); };
+    set(next);
+    post(isGiven ? { action: 'given', person: name, value: next } : { action: 'mark', person: name, item: label, value: next })
+      .catch((err) => { set(!next); toast(`Não salvou: ${err.message}`); });
+  }
+  async function saveLive(key, rec) {
+    const btn = $('ed-save'); btn.disabled = true; btn.textContent = 'Salvando';
+    try {
+      await post({ action: 'save', key: key || '', person: { name: rec.name, desc: rec.desc, items: rec.items.map(({ label, owner, products }) => ({ label, owner, products })) } });
+      hideSheet(editor);
+      toast(key ? 'Presente atualizado na planilha.' : 'Presente adicionado na planilha.');
+    } catch (err) { toast(`Não salvou: ${err.message}`); }
+    finally { btn.disabled = false; btn.textContent = 'Salvar'; }
+  }
+  async function deleteLive(key) {
+    try { await post({ action: 'delete', name: key }); hideSheet(editor); toast('Presente apagado da planilha.'); }
+    catch (err) { toast(`Não apagou: ${err.message}`); }
+  }
+
+  editor.addEventListener('input', (e) => {
+    const f = e.target.dataset.f; if (!f) return;
+    if (e.target.dataset.i !== undefined) draft.items[+e.target.dataset.i][f] = e.target.value;
+    else draft[f] = e.target.value;
+  });
+  editor.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); e.target.blur(); } });
+  editor.addEventListener('click', (e) => {
+    if (e.target.closest('[data-close]')) { hideSheet(editor); return; }
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'ed-save') { saveEditor(); return; }
+    if (b.dataset.owner) { draft.items[+b.dataset.i].owner = b.dataset.owner; renderEditor(); return; }
+    if (b.dataset.pick) {
+      const ps = draft.items[+b.dataset.i].products; const k = b.dataset.pick;
+      const at = ps.indexOf(k); if (at >= 0) ps.splice(at, 1); else ps.push(k);
+      renderEditor(); return;
+    }
+    if (b.dataset.remove !== undefined) { draft.items.splice(+b.dataset.remove, 1); renderEditor(); return; }
+    if (b.dataset.addItem !== undefined) {
+      draft.items.push({ label: '', owner: 'Paulo', products: [], file: false });
+      renderEditor();
+      const inputs = editor.querySelectorAll('[data-f="label"]'); inputs[inputs.length - 1].focus();
+      return;
+    }
+    if (b.dataset.revert !== undefined) { delete edits[draft.key]; store(KEY_EDITS, edits); build(); render(); hideSheet(editor); toast('Edição desfeita.'); return; }
+    if (b.dataset.delete !== undefined) deletePerson();
+  });
+
+  // ---------- enviar: marcas e edições, já no formato do data.js ----------
+  let toastT = 0;
+  function toast(msg) {
+    const t = $('toast'); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2600);
+  }
+  const block = (p) => [`## ${p.name}`, p.desc, ...p.items.map((it) => `- [${val(it.id) ? 'x' : ' '}] ${it.label} · ${it.owner}${it.products.length ? ` @ ${it.products.join(', ')}` : ''}`), val(p.givenId) ? 'entregue' : ''].filter(Boolean).join('\n');
+  async function send() {
+    if (!changes()) { toast('Nenhuma mudança neste aparelho.'); return; }
+    const parts = [`Presentes Natal, mudanças de ${new Date().toLocaleDateString('pt-BR')}`];
+    const touched = new Set();
+    for (const [k, e] of Object.entries(edits)) {
+      if (e === null) { parts.push(`apagar: ${k}`); continue; }
+      const p = people.find((x) => x.key === k); if (!p) continue;
+      touched.add(p.name);
+      parts.push(`${k.startsWith('new:') ? 'novo' : `editar ${k}`}:\n${block(p)}`);
+    }
+    const marks = Object.keys(local).filter((id) => !touched.has(id.split('::')[0]))
+      .map((id) => { const [who, what] = id.split('::'); return `${local[id] ? 'feito' : 'desfeito'}: ${who} · ${what}`; });
+    if (marks.length) parts.push(marks.join('\n'));
+    const text = parts.join('\n\n');
+    try {
+      if (navigator.share) { await navigator.share({ text }); return; }
+      await navigator.clipboard.writeText(text);
+      toast('Copiado. Cole na conversa com o Paulo.');
+    } catch (e) {
+      if (e && e.name === 'AbortError') return;
+      toast('Não deu para copiar neste navegador.');
+    }
+  }
+
+  // ---------- barra compacta: aparece quando o título grande sai da tela ----------
+  const nav = $('navbar');
+  new IntersectionObserver(([e]) => { nav.classList.toggle('on', !e.isIntersecting); }, { rootMargin: '-44px 0px 0px 0px' }).observe($('title'));
+
+  // ---------- eventos ----------
+  $('q').addEventListener('input', (e) => { query = norm(e.target.value.trim()); render(); });
+  $('q').addEventListener('keydown', (e) => { if (e.key === 'Enter') e.target.blur(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!editor.hidden) hideSheet(editor); else if (!sheet.hidden) hideSheet(sheet);
+  });
+  sheet.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) hideSheet(sheet); });
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('#sheet, #editor')) return;
+    if (e.target.closest('[data-new]')) { openEditor(null); return; }
+    const ed = e.target.closest('[data-edit]');
+    if (ed) { openEditor(ed.dataset.edit); return; }
+    const pr = e.target.closest('[data-product]');
+    if (pr) { openProduct(pr.dataset.product); return; }
+    const t = e.target.closest('[data-id]');
+    if (t) { toggle(t.dataset.id); return; }
+    const pc = e.target.closest('[data-person]');
+    if (pc) { const k2 = pc.dataset.person; if (openP.has(k2)) openP.delete(k2); else openP.add(k2); render(); return; }
+    const sc = e.target.closest('[data-sec]');
+    if (sc) { const id = sc.dataset.sec; ui.closed[id] = !ui.closed[id]; saveUi(); render(); return; }
+    const k = e.target.closest('[data-key]');
+    if (k) { const key = k.dataset.key; if (open.has(key)) open.delete(key); else open.add(key); render(); return; }
+    const v = e.target.closest('[data-view]');
+    if (v) {
+      if (view === v.dataset.view) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+      view = v.dataset.view;
+      document.querySelectorAll('[data-view]').forEach((b) => b.setAttribute('aria-selected', b === v));
+      render(); window.scrollTo({ top: 0 }); return;
+    }
+    if (e.target.closest('#navbar')) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (e.target.closest('#send')) send();
+  });
+
+  build();
+  render();
+  if (API) {
+    pull();
+    // volta a ler quando a página reaparece e a cada 45 s com ela aberta, para ver o que a outra pessoa marcou
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) pull(); });
+    setInterval(() => { if (!document.hidden) pull(); }, 45000);
+  }
+})();
+
+</script>
+</body>
+</html>
